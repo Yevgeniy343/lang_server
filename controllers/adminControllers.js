@@ -42,11 +42,16 @@ const createEvent = async (req, res) => {
     date1: date1,
     date2: date2,
     description: description,
-    pdf: req.files.file.path,
-    image: req.files.image.path,
+    pdf: req.files["file"][0].path,
+    image: req.files["image"][0].path,
   });
   // console.log(req.body);
-  // console.log(req.files.file);
   res.status(StatusCodes.CREATED).json(event);
 };
-export { login, createEvent };
+
+const getEvents = async (req, res) => {
+  let events = await Event.find({});
+  res.status(StatusCodes.OK).json({ events });
+};
+
+export { login, createEvent, getEvents };

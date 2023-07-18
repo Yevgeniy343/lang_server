@@ -20,7 +20,7 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 
-app.use("/uploads/video", express.static(path.join("uploads", "files")));
+app.use("/uploads/files", express.static(path.join("uploads", "files")));
 
 app.get("/", (req, res) => {
   res.json({ msg: "welcom" });

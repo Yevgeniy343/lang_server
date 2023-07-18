@@ -5,7 +5,7 @@ const EventSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, "Please provide name"],
-      unique: true,
+      // unique: true,
       trim: true,
     },
     date1: {
