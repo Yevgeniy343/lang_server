@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import "express-async-errors";
 const app = express();
 import morgan from "morgan";
+import path from "path";
 
 import authRouter from "./routes/authRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
@@ -18,6 +19,8 @@ import authenticateUser from "./middleware/auth.js";
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
+
+app.use("/uploads/video", express.static(path.join("uploads", "files")));
 
 app.get("/", (req, res) => {
   res.json({ msg: "welcom" });
