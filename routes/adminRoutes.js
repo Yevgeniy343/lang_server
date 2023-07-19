@@ -4,6 +4,7 @@ import {
   createEvent,
   login,
   getEvents,
+  editEvent,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -13,5 +14,9 @@ router
   .post(fileUpload.fields([{ name: "file" }, { name: "image" }]), createEvent);
 
 router.route("/getevents").get(getEvents);
+
+router
+  .route("/editevent")
+  .patch(fileUpload.fields([{ name: "file" }, { name: "image" }]), editEvent);
 
 export default router;
