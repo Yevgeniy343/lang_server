@@ -1,7 +1,7 @@
 import Admin from "../models/Admin.js";
 import Event from "../models/Event.js";
 import { StatusCodes } from "http-status-codes";
-
+import fs from "fs";
 import {
   BadRequestError,
   UnAuthenticatedError,
@@ -70,41 +70,75 @@ const editEvent = async (req, res) => {
     );
   }
 
+  let event;
+  let events;
+  event = await Event.findById(id);
+
   if (file === "false" && image === "false") {
-    const event = await Event.findByIdAndUpdate(id, {
-      name: name,
-      date1: date1,
-      date2: date2,
-      description: description,
-    });
+    (event.name = name),
+      (event.date1 = date1),
+      (event.date2 = date2),
+      (event.description = description);
   } else if (file === "false" && image !== "false") {
-    const event = await Event.findByIdAndUpdate(id, {
-      name: name,
-      date1: date1,
-      date2: date2,
-      description: description,
-      image: req.files["image"][0].path,
+    fs.unlink(event.image, (err) => {
+      console.log(err);
     });
+    (event.name = name),
+      (event.date1 = date1),
+      (event.date2 = date2),
+      (event.description = description),
+      (event.image = req.files["image"][0].path);
+    await event.save();
   } else if (file !== "false" && image === "false") {
-    const event = await Event.findByIdAndUpdate(id, {
-      name: name,
-      date1: date1,
-      date2: date2,
-      description: description,
-      pdf: req.files["file"][0].path,
+    fs.unlink(event.pdf, (err) => {
+      console.log(err);
     });
+    (event.name = name),
+      (event.date1 = date1),
+      (event.date2 = date2),
+      (event.description = description),
+      (event.pdf = req.files["file"][0].path);
+    await event.save();
   } else {
-    const event = await Event.findByIdAndUpdate(id, {
-      name: name,
-      date1: date1,
-      date2: date2,
-      description: description,
-      pdf: req.files["file"][0].path,
-      image: req.files["image"][0].path,
+    fs.unlink(event.image, (err) => {
+      console.log(err);
     });
+    fs.unlink(event.pdf, (err) => {
+      console.log(err);
+    });
+    (event.name = name),
+      (event.date1 = date1),
+      (event.date2 = date2),
+      (event.description = description),
+      (event.image = req.files["image"][0].path),
+      (event.pdf = req.files["file"][0].path);
+    await event.save();
   }
+  events = await Event.find({});
+  res.status(StatusCodes.OK).json({ events });
+};
+
+const deleteEvent = async (req, res) => {
+  console.log(req.params.id);
+  let event;
+  let delete_file1;
+  let delete_file2;
+  try {
+    event = await Event.findById(req.params.id);
+    throw new BadRequestError("Error 500!");
+  } catch (error) {}
+  delete_file1 = event.pdf;
+  delete_file2 = event.image;
+  console.log(delete_file1, delete_file2);
+  fs.unlink(delete_file1, (err) => {
+    console.log(err);
+  });
+  fs.unlink(delete_file2, (err) => {
+    console.log(err);
+  });
+  await Event.deleteOne(event);
   const events = await Event.find({});
   res.status(StatusCodes.OK).json({ events });
 };
 
-export { login, createEvent, getEvents, editEvent };
+export { login, createEvent, getEvents, editEvent, deleteEvent };
