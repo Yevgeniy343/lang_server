@@ -18,6 +18,13 @@ const UserSchema = new mongoose.Schema(
     city: {
       type: String,
     },
+    job: {
+      type: String,
+    },
+    job_title: {
+      type: String,
+    },
+
     email: {
       type: String,
       required: [true, "Please provide email"],
