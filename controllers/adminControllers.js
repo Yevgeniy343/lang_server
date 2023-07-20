@@ -79,6 +79,7 @@ const editEvent = async (req, res) => {
       (event.date1 = date1),
       (event.date2 = date2),
       (event.description = description);
+    await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
       console.log(err);
