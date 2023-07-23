@@ -1,5 +1,6 @@
 import Admin from "../models/Admin.js";
 import Event from "../models/Event.js";
+import User from "../models/Users.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -142,4 +143,15 @@ const deleteEvent = async (req, res) => {
   res.status(StatusCodes.OK).json({ events });
 };
 
-export { login, createEvent, getEvents, editEvent, deleteEvent };
+const getUsers = async (req, res) => {
+  let users;
+  try {
+    users = await User.find({});
+    console.log(users);
+    res.status(StatusCodes.OK).json({ users });
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
+export { login, createEvent, getEvents, editEvent, deleteEvent, getUsers };
