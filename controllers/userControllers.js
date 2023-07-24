@@ -43,4 +43,32 @@ const getEvent = async (req, res) => {
   res.status(StatusCodes.OK).json({ event });
 };
 
-export { editUser, getEvent };
+const changePass = async (req, res) => {
+  const { id, pass, pass1, pass2 } = req.body;
+  let user;
+  try {
+    user = await User.findById(id);
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+  console.log(user);
+
+  if (pass1 !== pass2) {
+    throw new BadRequestError("Введенные пароли не совпадают !");
+  }
+
+  const isPasswordCorrect = await user.comparePassword(pass);
+
+  if (!isPasswordCorrect) {
+    throw new BadRequestError("Текущий пароль указан не верно !");
+  }
+
+  user.password = pass1;
+  await user.save();
+
+  user = await User.findById(id);
+  const token = user.createJWT();
+  res.status(StatusCodes.OK).json({ user, token });
+};
+
+export { editUser, getEvent, changePass };
