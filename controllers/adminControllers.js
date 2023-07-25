@@ -21,7 +21,6 @@ const login = async (req, res) => {
   if (password !== admin.password) {
     throw new UnAuthenticatedError("Не корректные данные");
   }
-  console.log(admin);
   res.status(StatusCodes.OK).json({ admin: login });
 };
 
