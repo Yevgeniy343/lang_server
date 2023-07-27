@@ -64,32 +64,41 @@ const remind = async (req, res) => {
       "Мы не нашли Вас в зарегистрированных пользователях. Проверьте правильность указанной почты "
     );
   }
+  try {
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "kronujin@gmail.com",
+        pass: process.env.APP,
+      },
+    });
 
-  var transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: "kronujin@gmail.com",
-      pass: process.env.APP,
-    },
-  });
+    var mailOptions = {
+      from: "kronujin@gmail.com",
+      to: `${remind_email}`,
+      subject: "Новый пароль",
+      text: "",
+      html: `<h1 style="color:#a6a28e">${new_pass}</h1>`,
+    };
 
-  var mailOptions = {
-    from: "kronujin@gmail.com",
-    to: `${remind_email}`,
-    subject: "Новый пароль",
-    text: "",
-    html: `<h1 style="color:#a6a28e">${new_pass}</h1>`,
-  };
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.status(StatusCodes.OK).json(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(StatusCodes.OK).json("Email sent: " + info.response);
+      }
+    });
+  } catch (error) {
+    throw new BadRequestError("Error 500 !");
+  }
 
-  transporter.sendMail(mailOptions, function (error, info) {
-    if (error) {
-      console.log(error);
-      res.status(StatusCodes.OK).json(error);
-    } else {
-      console.log("Email sent: " + info.response);
-      res.status(StatusCodes.OK).json("Email sent: " + info.response);
-    }
-  });
+  user.password = new_pass;
+  await user.save();
+  res
+    .status(StatusCodes.OK)
+    .json({ msg: "Сгенерированный пароль отправлен на указанный Email" });
 };
 
 export { signup, login, remind };
