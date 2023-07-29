@@ -25,7 +25,7 @@ const login = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  const { name, date1, date2, description } = req.body;
+  const { name, date1, date2 } = req.body;
 
   if (!name) {
     throw new BadRequestError("Введите все значения");
@@ -41,7 +41,6 @@ const createEvent = async (req, res) => {
     name: name,
     date1: date1,
     date2: date2,
-    description: description,
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
@@ -55,12 +54,12 @@ const getEvents = async (req, res) => {
 };
 
 const editEvent = async (req, res) => {
-  const { name, date1, date2, description, id, file, image } = req.body;
+  const { name, date1, date2, id, file, image } = req.body;
 
   console.log(req.body);
   // console.log(req.files);
 
-  if (!name || !date1 || !date2 || !description) {
+  if (!name || !date1 || !date2) {
     throw new BadRequestError("Введите все значения");
   }
 
@@ -78,8 +77,7 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.description = description);
-    await event.save();
+      await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
       console.log(err);
@@ -87,7 +85,6 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.description = description),
       (event.image = req.files["image"][0].path);
     await event.save();
   } else if (file !== "false" && image === "false") {
@@ -97,7 +94,6 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.description = description),
       (event.pdf = req.files["file"][0].path);
     await event.save();
   } else {
@@ -110,7 +106,6 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.description = description),
       (event.image = req.files["image"][0].path),
       (event.pdf = req.files["file"][0].path);
     await event.save();

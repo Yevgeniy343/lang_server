@@ -16,9 +16,6 @@ const EventSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide date2"],
     },
-    description: {
-      type: String,
-    },
     pdf: {
       type: String,
     },
