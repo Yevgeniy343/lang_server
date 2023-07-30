@@ -95,7 +95,31 @@ const getEvents = async (req, res) => {
 };
 
 const editEvent = async (req, res) => {
-  const { name, date1, date2, id, file, image } = req.body;
+  const {
+    name,
+    date1,
+    date2,
+    id,
+    file,
+    image,
+    childNom_1,
+    childNom_2,
+    childNom_3,
+    childNom_4,
+    childNom_5,
+    childNom_6,
+    childNom_7,
+    childNom_8,
+    childNom_9,
+    childNom_10,
+    adultNom_1,
+    adultNom_2,
+    adultNom_3,
+    adultNom_4,
+    adultNom_5,
+    adultNom_6,
+    adultNom_7,
+  } = req.body;
 
   console.log(req.body);
   // console.log(req.files);
@@ -118,7 +142,24 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      await event.save();
+      (event.childNom_1 = childNom_1);
+    event.childNom_2 = childNom_2;
+    event.childNom_3 = childNom_3;
+    event.childNom_4 = childNom_4;
+    event.childNom_5 = childNom_5;
+    event.childNom_6 = childNom_6;
+    event.childNom_7 = childNom_7;
+    event.childNom_8 = childNom_8;
+    event.childNom_9 = childNom_9;
+    event.childNom_10 = childNom_10;
+    event.adultNom_1 = adultNom_1;
+    event.adultNom_2 = adultNom_2;
+    event.adultNom_3 = adultNom_3;
+    event.adultNom_4 = adultNom_4;
+    event.adultNom_5 = adultNom_5;
+    event.adultNom_6 = adultNom_6;
+    event.adultNom_7 = adultNom_7;
+    await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
       console.log(err);
@@ -126,7 +167,24 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.image = req.files["image"][0].path);
+      (event.childNom_1 = childNom_1);
+    event.childNom_2 = childNom_2;
+    event.childNom_3 = childNom_3;
+    event.childNom_4 = childNom_4;
+    event.childNom_5 = childNom_5;
+    event.childNom_6 = childNom_6;
+    event.childNom_7 = childNom_7;
+    event.childNom_8 = childNom_8;
+    event.childNom_9 = childNom_9;
+    event.childNom_10 = childNom_10;
+    event.adultNom_1 = adultNom_1;
+    event.adultNom_2 = adultNom_2;
+    event.adultNom_3 = adultNom_3;
+    event.adultNom_4 = adultNom_4;
+    event.adultNom_5 = adultNom_5;
+    event.adultNom_6 = adultNom_6;
+    event.adultNom_7 = adultNom_7;
+    event.image = req.files["image"][0].path;
     await event.save();
   } else if (file !== "false" && image === "false") {
     fs.unlink(event.pdf, (err) => {
@@ -135,7 +193,24 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.pdf = req.files["file"][0].path);
+      (event.childNom_1 = childNom_1);
+    event.childNom_2 = childNom_2;
+    event.childNom_3 = childNom_3;
+    event.childNom_4 = childNom_4;
+    event.childNom_5 = childNom_5;
+    event.childNom_6 = childNom_6;
+    event.childNom_7 = childNom_7;
+    event.childNom_8 = childNom_8;
+    event.childNom_9 = childNom_9;
+    event.childNom_10 = childNom_10;
+    event.adultNom_1 = adultNom_1;
+    event.adultNom_2 = adultNom_2;
+    event.adultNom_3 = adultNom_3;
+    event.adultNom_4 = adultNom_4;
+    event.adultNom_5 = adultNom_5;
+    event.adultNom_6 = adultNom_6;
+    event.adultNom_7 = adultNom_7;
+    event.pdf = req.files["file"][0].path;
     await event.save();
   } else {
     fs.unlink(event.image, (err) => {
@@ -147,7 +222,24 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.image = req.files["image"][0].path),
+      (event.childNom_1 = childNom_1);
+    event.childNom_2 = childNom_2;
+    event.childNom_3 = childNom_3;
+    event.childNom_4 = childNom_4;
+    event.childNom_5 = childNom_5;
+    event.childNom_6 = childNom_6;
+    event.childNom_7 = childNom_7;
+    event.childNom_8 = childNom_8;
+    event.childNom_9 = childNom_9;
+    event.childNom_10 = childNom_10;
+    event.adultNom_1 = adultNom_1;
+    event.adultNom_2 = adultNom_2;
+    event.adultNom_3 = adultNom_3;
+    event.adultNom_4 = adultNom_4;
+    event.adultNom_5 = adultNom_5;
+    event.adultNom_6 = adultNom_6;
+    event.adultNom_7 = adultNom_7;
+    (event.image = req.files["image"][0].path),
       (event.pdf = req.files["file"][0].path);
     await event.save();
   }
