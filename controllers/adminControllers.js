@@ -25,7 +25,30 @@ const login = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  const { name, date1, date2 } = req.body;
+  // console.log(req.body.childNom_1);
+  console.log(req.body);
+  const {
+    name,
+    date1,
+    date2,
+    childNom_1,
+    childNom_2,
+    childNom_3,
+    childNom_4,
+    childNom_5,
+    childNom_6,
+    childNom_7,
+    childNom_8,
+    childNom_9,
+    childNom_10,
+    adultNom_1,
+    adultNom_2,
+    adultNom_3,
+    adultNom_4,
+    adultNom_5,
+    adultNom_6,
+    adultNom_7,
+  } = req.body;
 
   if (!name) {
     throw new BadRequestError("Введите все значения");
@@ -41,6 +64,24 @@ const createEvent = async (req, res) => {
     name: name,
     date1: date1,
     date2: date2,
+    childNom_1: childNom_1,
+    childNom_2: childNom_2,
+    childNom_3: childNom_3,
+    childNom_4: childNom_4,
+    childNom_5: childNom_5,
+    childNom_6: childNom_6,
+    childNom_7: childNom_7,
+    childNom_8: childNom_8,
+    childNom_9: childNom_9,
+    childNom_10: childNom_10,
+    adultNom_1: adultNom_1,
+    adultNom_2: adultNom_2,
+    adultNom_3: adultNom_3,
+    adultNom_4: adultNom_4,
+    adultNom_5: adultNom_5,
+    adultNom_6: adultNom_6,
+    adultNom_7: adultNom_7,
+
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
