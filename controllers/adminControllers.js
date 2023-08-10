@@ -1,6 +1,7 @@
 import Admin from "../models/Admin.js";
 import Event from "../models/Event.js";
 import User from "../models/Users.js";
+import Nomination from "../models/Nomination.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -281,4 +282,38 @@ const getUsers = async (req, res) => {
   }
 };
 
-export { login, createEvent, getEvents, editEvent, deleteEvent, getUsers };
+const createNom = async (req, res) => {
+  console.log(req.body);
+  const { name, condition } = req.body;
+  if (!name || !condition) {
+    throw new BadRequestError("Введите все значения");
+  }
+  let nom;
+  if (condition === "доступно прикрепление ссылки") {
+    nom = await Nomination.create({ name: name, link: true, file: false });
+  } else {
+    nom = await Nomination.create({ name: name, link: false, file: true });
+  }
+  await nom.save();
+  res.status(StatusCodes.CREATED).json(nom);
+};
+
+const getNom = async (req, res) => {
+  try {
+    const nom = await Nomination.find({});
+    res.status(StatusCodes.OK).json(nom);
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
+export {
+  login,
+  createEvent,
+  getEvents,
+  editEvent,
+  deleteEvent,
+  getUsers,
+  createNom,
+  getNom,
+};

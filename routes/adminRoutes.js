@@ -7,6 +7,8 @@ import {
   editEvent,
   deleteEvent,
   getUsers,
+  createNom,
+  getNom,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -24,5 +26,9 @@ router
 router.route("/deleteevent/:id").delete(deleteEvent);
 
 router.route("/getallusers").get(getUsers);
+
+router.route("/createnom").post(createNom);
+
+router.route("/getnom").get(getNom);
 
 export default router;
