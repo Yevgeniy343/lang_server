@@ -9,6 +9,7 @@ import {
   getUsers,
   createNom,
   getNom,
+  deleteNom,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -30,5 +31,7 @@ router.route("/getallusers").get(getUsers);
 router.route("/createnom").post(createNom);
 
 router.route("/getnom").get(getNom);
+
+router.route("/deletenom/:id").delete(deleteNom);
 
 export default router;

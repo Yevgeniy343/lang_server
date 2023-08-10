@@ -294,7 +294,7 @@ const createNom = async (req, res) => {
   } else {
     nom = await Nomination.create({ name: name, link: false, file: true });
   }
-  await nom.save();
+  // await nom.save();
   res.status(StatusCodes.CREATED).json(nom);
 };
 
@@ -307,6 +307,21 @@ const getNom = async (req, res) => {
   }
 };
 
+const deleteNom = async (req, res) => {
+  console.log(req.params);
+  const id = req.params.id;
+  console.log("id=", id);
+  if (!id) {
+    throw new BadRequestError("Введите все значения");
+  }
+  let nom;
+  let noms;
+  nom = await Nomination.findById(id);
+  await Nomination.deleteOne(nom);
+  noms = await Nomination.find({});
+  res.status(StatusCodes.OK).json(noms);
+};
+
 export {
   login,
   createEvent,
@@ -316,4 +331,5 @@ export {
   getUsers,
   createNom,
   getNom,
+  deleteNom,
 };
