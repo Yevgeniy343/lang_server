@@ -1,5 +1,7 @@
 import User from "../models/Users.js";
 import Event from "../models/Event.js";
+import NomE from "../models/NomE.js";
+import Nomination from "../models/Nomination.js";
 import { StatusCodes } from "http-status-codes";
 
 import {
@@ -39,8 +41,9 @@ const editUser = async (req, res) => {
 
 const getEvent = async (req, res) => {
   const event = await Event.find({});
-  console.log(event);
-  res.status(StatusCodes.OK).json({ event });
+  const noms = await NomE.find({});
+  const nominations = await Nomination.find({});
+  res.status(StatusCodes.OK).json({ event, noms, nominations });
 };
 
 const changePass = async (req, res) => {
@@ -51,7 +54,6 @@ const changePass = async (req, res) => {
   } catch (error) {
     throw new BadRequestError("Ошибка 500!");
   }
-  console.log(user);
 
   if (pass1 !== pass2) {
     throw new BadRequestError("Введенные пароли не совпадают !");

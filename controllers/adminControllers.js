@@ -27,7 +27,6 @@ const login = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  console.log(req.body);
   const { name, date1, date2 } = req.body;
 
   if (!name) {
@@ -48,7 +47,6 @@ const createEvent = async (req, res) => {
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
-  console.log(event._id);
 
   const nomE = await NomE.create({
     childNoms: req.body.childNom,
@@ -65,9 +63,9 @@ const getEvents = async (req, res) => {
 };
 
 const editEvent = async (req, res) => {
+  console.log(req.body);
   const { name, date1, date2, id, file, image } = req.body;
 
-  console.log(req.body);
   // console.log(req.files);
 
   if (!name || !date1 || !date2) {
@@ -82,6 +80,8 @@ const editEvent = async (req, res) => {
 
   let event;
   let events;
+  let nomE;
+
   event = await Event.findById(id);
 
   if (file === "false" && image === "false") {
@@ -121,12 +121,17 @@ const editEvent = async (req, res) => {
       (event.pdf = req.files["file"][0].path);
     await event.save();
   }
+
+  nomE = await NomE.findById(req.body.nomId);
+  nomE.childNoms = req.body.childNoms;
+  nomE.adultNoms = req.body.adultNoms;
+  await nomE.save();
+
   events = await Event.find({});
   res.status(StatusCodes.OK).json({ events });
 };
 
 const deleteEvent = async (req, res) => {
-  console.log(req.params.id);
   let event;
   let delete_file1;
   let delete_file2;
@@ -160,7 +165,6 @@ const getUsers = async (req, res) => {
 };
 
 const createNom = async (req, res) => {
-  console.log(req.body);
   const { name, condition } = req.body;
   if (!name || !condition) {
     throw new BadRequestError("Введите все значения");
@@ -185,9 +189,7 @@ const getNom = async (req, res) => {
 };
 
 const deleteNom = async (req, res) => {
-  console.log(req.params);
   const id = req.params.id;
-  console.log("id=", id);
   if (!id) {
     throw new BadRequestError("Введите все значения");
   }
