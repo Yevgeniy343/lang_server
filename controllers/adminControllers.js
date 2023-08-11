@@ -2,6 +2,7 @@ import Admin from "../models/Admin.js";
 import Event from "../models/Event.js";
 import User from "../models/Users.js";
 import Nomination from "../models/Nomination.js";
+import NomE from "../models/NomE.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -26,7 +27,6 @@ const login = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  // console.log(req.body.childNom_1);
   console.log(req.body);
   const { name, date1, date2 } = req.body;
 
@@ -48,13 +48,20 @@ const createEvent = async (req, res) => {
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
-  // console.log(req.body);
+  console.log(event._id);
+
+  const nomE = await NomE.create({
+    childNoms: req.body.childNom,
+    adultNoms: req.body.adultNom,
+    eventId: event._id,
+  });
   res.status(StatusCodes.CREATED).json(event);
 };
 
 const getEvents = async (req, res) => {
   let events = await Event.find({});
-  res.status(StatusCodes.OK).json({ events });
+  let noms = await NomE.find({});
+  res.status(StatusCodes.OK).json({ events, noms });
 };
 
 const editEvent = async (req, res) => {
