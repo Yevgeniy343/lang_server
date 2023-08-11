@@ -88,7 +88,10 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      await event.save();
+      (event.extra1 = req.body.extra1);
+    event.extra2 = req.body.extra2;
+    event.extra3 = req.body.extra3;
+    await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
       console.log(err);
@@ -96,7 +99,10 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.image = req.files["image"][0].path);
+      (event.extra1 = req.body.extra1);
+    event.extra2 = req.body.extra2;
+    event.extra3 = req.body.extra3;
+    event.image = req.files["image"][0].path;
     await event.save();
   } else if (file !== "false" && image === "false") {
     fs.unlink(event.pdf, (err) => {
@@ -105,7 +111,10 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.pdf = req.files["file"][0].path);
+      (event.extra1 = req.body.extra1);
+    event.extra2 = req.body.extra2;
+    event.extra3 = req.body.extra3;
+    event.pdf = req.files["file"][0].path;
     await event.save();
   } else {
     fs.unlink(event.image, (err) => {
@@ -117,7 +126,10 @@ const editEvent = async (req, res) => {
     (event.name = name),
       (event.date1 = date1),
       (event.date2 = date2),
-      (event.image = req.files["image"][0].path),
+      (event.extra1 = req.body.extra1);
+    event.extra2 = req.body.extra2;
+    event.extra3 = req.body.extra3;
+    (event.image = req.files["image"][0].path),
       (event.pdf = req.files["file"][0].path);
     await event.save();
   }
