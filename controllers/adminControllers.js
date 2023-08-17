@@ -31,7 +31,15 @@ const createEvent = async (req, res) => {
   const { name, date1, date2, tarif_1, tarif_2, tarif_3, supervisor } =
     req.body;
 
-  if (!name) {
+  if (
+    !name ||
+    !date1 ||
+    !date2 ||
+    !tarif_1 ||
+    !tarif_2 ||
+    !tarif_3 ||
+    !supervisor
+  ) {
     throw new BadRequestError("Введите все значения");
   }
 
@@ -69,11 +77,30 @@ const getEvents = async (req, res) => {
 
 const editEvent = async (req, res) => {
   console.log(req.body);
-  const { name, date1, date2, id, file, image } = req.body;
+  const {
+    name,
+    date1,
+    date2,
+    id,
+    file,
+    image,
+    tarif_1,
+    tarif_2,
+    tarif_3,
+    supervisor,
+  } = req.body;
 
   // console.log(req.files);
 
-  if (!name || !date1 || !date2) {
+  if (
+    !name ||
+    !date1 ||
+    !date2 ||
+    !tarif_1 ||
+    !tarif_2 ||
+    !tarif_3 ||
+    !supervisor
+  ) {
     throw new BadRequestError("Введите все значения");
   }
 
@@ -96,6 +123,10 @@ const editEvent = async (req, res) => {
       (event.extra1 = req.body.extra1);
     event.extra2 = req.body.extra2;
     event.extra3 = req.body.extra3;
+    event.tarif_1 = tarif_1;
+    event.tarif_2 = tarif_2;
+    event.tarif_3 = tarif_3;
+    event.supervisor = supervisor;
     await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
@@ -107,6 +138,10 @@ const editEvent = async (req, res) => {
       (event.extra1 = req.body.extra1);
     event.extra2 = req.body.extra2;
     event.extra3 = req.body.extra3;
+    event.tarif_1 = tarif_1;
+    event.tarif_2 = tarif_2;
+    event.tarif_3 = tarif_3;
+    event.supervisor = supervisor;
     event.image = req.files["image"][0].path;
     await event.save();
   } else if (file !== "false" && image === "false") {
@@ -119,6 +154,10 @@ const editEvent = async (req, res) => {
       (event.extra1 = req.body.extra1);
     event.extra2 = req.body.extra2;
     event.extra3 = req.body.extra3;
+    event.tarif_1 = tarif_1;
+    event.tarif_2 = tarif_2;
+    event.tarif_3 = tarif_3;
+    event.supervisor = supervisor;
     event.pdf = req.files["file"][0].path;
     await event.save();
   } else {
@@ -134,6 +173,10 @@ const editEvent = async (req, res) => {
       (event.extra1 = req.body.extra1);
     event.extra2 = req.body.extra2;
     event.extra3 = req.body.extra3;
+    event.tarif_1 = tarif_1;
+    event.tarif_2 = tarif_2;
+    event.tarif_3 = tarif_3;
+    event.supervisor = supervisor;
     (event.image = req.files["image"][0].path),
       (event.pdf = req.files["file"][0].path);
     await event.save();

@@ -33,15 +33,19 @@ const EventSchema = new mongoose.Schema(
     },
     tarif_1: {
       type: Number,
+      required: [true, "Please provide price"],
     },
     tarif_2: {
       type: Number,
+      required: [true, "Please provide price"],
     },
     tarif_3: {
       type: Number,
+      required: [true, "Please provide price"],
     },
     supervisor: {
       type: Number,
+      required: [true, "Please provide price"],
     },
   },
   { timestamps: true }
