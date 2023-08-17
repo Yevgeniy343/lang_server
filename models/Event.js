@@ -31,6 +31,18 @@ const EventSchema = new mongoose.Schema(
     extra3: {
       type: String,
     },
+    tarif_1: {
+      type: Number,
+    },
+    tarif_2: {
+      type: Number,
+    },
+    tarif_3: {
+      type: Number,
+    },
+    supervisor: {
+      type: Number,
+    },
   },
   { timestamps: true }
 );

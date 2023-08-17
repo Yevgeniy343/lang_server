@@ -27,7 +27,9 @@ const login = async (req, res) => {
 };
 
 const createEvent = async (req, res) => {
-  const { name, date1, date2 } = req.body;
+  console.log(req.body);
+  const { name, date1, date2, tarif_1, tarif_2, tarif_3, supervisor } =
+    req.body;
 
   if (!name) {
     throw new BadRequestError("Введите все значения");
@@ -43,7 +45,10 @@ const createEvent = async (req, res) => {
     name: name,
     date1: date1,
     date2: date2,
-
+    tarif_1: tarif_1,
+    tarif_2: tarif_2,
+    tarif_3: tarif_3,
+    supervisor: supervisor,
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
