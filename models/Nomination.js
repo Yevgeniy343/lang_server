@@ -13,6 +13,9 @@ const NominationSchema = new mongoose.Schema(
     file: {
       type: Boolean,
     },
+    language: {
+      type: Boolean,
+    },
   },
   { timestamps: true }
 );

@@ -225,16 +225,24 @@ const getUsers = async (req, res) => {
 };
 
 const createNom = async (req, res) => {
-  const { name, condition } = req.body;
-  if (!name || !condition) {
+  console.log(req.body);
+  const { name, condition1, condition2, condition3 } = req.body;
+  if (!name) {
     throw new BadRequestError("Введите все значения");
   }
   let nom;
-  if (condition === "доступно прикрепление ссылки") {
-    nom = await Nomination.create({ name: name, link: true, file: false });
-  } else {
-    nom = await Nomination.create({ name: name, link: false, file: true });
-  }
+  nom = await Nomination.create({
+    name: name,
+    link: true ? condition1.length !== 0 : false,
+    file: true ? condition2.length !== 0 : false,
+    language: true ? condition3.length !== 0 : false,
+  });
+
+  // if (condition1 === "доступно прикрепление ссылки") {
+  //   nom = await Nomination.create({ name: name, link: true });
+  // } else {
+  //   nom = await Nomination.create({ name: name, link: false, file: true });
+  // }
   // await nom.save();
   res.status(StatusCodes.CREATED).json(nom);
 };
