@@ -43,7 +43,23 @@ const EventSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Please provide price"],
     },
+    tarif_1a: {
+      type: Number,
+      required: [true, "Please provide price"],
+    },
+    tarif_2a: {
+      type: Number,
+      required: [true, "Please provide price"],
+    },
+    tarif_3a: {
+      type: Number,
+      required: [true, "Please provide price"],
+    },
     supervisor: {
+      type: Number,
+      required: [true, "Please provide price"],
+    },
+    diplom: {
       type: Number,
       required: [true, "Please provide price"],
     },

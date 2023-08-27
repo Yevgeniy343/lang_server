@@ -28,8 +28,19 @@ const login = async (req, res) => {
 
 const createEvent = async (req, res) => {
   console.log(req.body);
-  const { name, date1, date2, tarif_1, tarif_2, tarif_3, supervisor } =
-    req.body;
+  const {
+    name,
+    date1,
+    date2,
+    tarif_1,
+    tarif_2,
+    tarif_3,
+    tarif_1a,
+    tarif_2a,
+    tarif_3a,
+    supervisor,
+    diplom,
+  } = req.body;
 
   if (
     !name ||
@@ -38,7 +49,11 @@ const createEvent = async (req, res) => {
     !tarif_1 ||
     !tarif_2 ||
     !tarif_3 ||
-    !supervisor
+    !tarif_1a ||
+    !tarif_2a ||
+    !tarif_3a ||
+    !supervisor ||
+    !diplom
   ) {
     throw new BadRequestError("Введите все значения");
   }
@@ -56,7 +71,11 @@ const createEvent = async (req, res) => {
     tarif_1: tarif_1,
     tarif_2: tarif_2,
     tarif_3: tarif_3,
+    tarif_1a: tarif_1a,
+    tarif_2a: tarif_2a,
+    tarif_3a: tarif_3a,
     supervisor: supervisor,
+    diplom: diplom,
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
@@ -87,7 +106,11 @@ const editEvent = async (req, res) => {
     tarif_1,
     tarif_2,
     tarif_3,
+    tarif_1a,
+    tarif_2a,
+    tarif_3a,
     supervisor,
+    diplom,
   } = req.body;
 
   // console.log(req.files);
@@ -99,7 +122,11 @@ const editEvent = async (req, res) => {
     !tarif_1 ||
     !tarif_2 ||
     !tarif_3 ||
-    !supervisor
+    !tarif_1a ||
+    !tarif_2a ||
+    !tarif_3a ||
+    !supervisor ||
+    !diplom
   ) {
     throw new BadRequestError("Введите все значения");
   }
@@ -126,7 +153,11 @@ const editEvent = async (req, res) => {
     event.tarif_1 = tarif_1;
     event.tarif_2 = tarif_2;
     event.tarif_3 = tarif_3;
+    event.tarif_1a = tarif_1a;
+    event.tarif_2a = tarif_2a;
+    event.tarif_3a = tarif_3a;
     event.supervisor = supervisor;
+    event.diplom = diplom;
     await event.save();
   } else if (file === "false" && image !== "false") {
     fs.unlink(event.image, (err) => {
@@ -141,7 +172,11 @@ const editEvent = async (req, res) => {
     event.tarif_1 = tarif_1;
     event.tarif_2 = tarif_2;
     event.tarif_3 = tarif_3;
+    event.tarif_1a = tarif_1a;
+    event.tarif_2a = tarif_2a;
+    event.tarif_3a = tarif_3a;
     event.supervisor = supervisor;
+    event.diplom = diplom;
     event.image = req.files["image"][0].path;
     await event.save();
   } else if (file !== "false" && image === "false") {
@@ -157,7 +192,11 @@ const editEvent = async (req, res) => {
     event.tarif_1 = tarif_1;
     event.tarif_2 = tarif_2;
     event.tarif_3 = tarif_3;
+    event.tarif_1a = tarif_1a;
+    event.tarif_2a = tarif_2a;
+    event.tarif_3a = tarif_3a;
     event.supervisor = supervisor;
+    event.diplom = diplom;
     event.pdf = req.files["file"][0].path;
     await event.save();
   } else {
@@ -176,7 +215,11 @@ const editEvent = async (req, res) => {
     event.tarif_1 = tarif_1;
     event.tarif_2 = tarif_2;
     event.tarif_3 = tarif_3;
+    event.tarif_1a = tarif_1a;
+    event.tarif_2a = tarif_2a;
+    event.tarif_3a = tarif_3a;
     event.supervisor = supervisor;
+    event.diplom = diplom;
     (event.image = req.files["image"][0].path),
       (event.pdf = req.files["file"][0].path);
     await event.save();
