@@ -76,8 +76,71 @@ const changePass = async (req, res) => {
 };
 
 const createChildOrder = async (req, res) => {
-  console.log(req.files["file"][0].path);
-  console.log(req.files["file2"][0].path);
+  // console.log(req.files["file"][0].path);
+  // console.log(req.files["file2"][0].path);
+  console.log(req.body);
+  const {
+    eventId,
+    name,
+    name2,
+    name3,
+    part,
+    curatorsAmount,
+    cur,
+    age,
+    subject,
+    punct,
+    graduate,
+    nomPul,
+    language,
+    language2,
+    link,
+    email,
+    phone,
+    extra1,
+    extra2,
+    extra3,
+  } = req.body;
+  if (!eventId || !name) {
+    throw new BadRequestError("Введите все значения");
+  }
+  let orderChild;
+  try {
+    orderChild = await OrderChild.create({
+      eventId: eventId,
+      name: name,
+      name2: name2,
+      name3: name3,
+      part: part,
+      curatorsAmount: curatorsAmount,
+      cur: cur,
+      age: age,
+      subject: subject,
+      punct: punct,
+      graduate: graduate,
+      nomPul: nomPul,
+      language: language,
+      language2: language2,
+      link: link,
+      email: email,
+      phone: phone,
+      extra1: extra1,
+      extra2: extra2,
+      extra3: extra3,
+      // file: req.files["file"][0].path,
+      file:
+        req.files && req.files["file"] && req.files["file"][0]
+          ? req.files["file"][0].path
+          : null,
+      file2:
+        req.files && req.files["file2"] && req.files["file2"][0]
+          ? req.files["file2"][0].path
+          : null,
+    });
+  } catch (error) {
+    throw new BadRequestError("Error 500!");
+  }
+  res.status(StatusCodes.CREATED).json(orderChild);
 };
 
 export { editUser, getEvent, changePass, createChildOrder };

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const OrderChildSchema = new mongoose.Schema(
   {
-    eventID: {
+    eventId: {
       type: String,
       required: [true, "Please provide eventId"],
     },
@@ -23,6 +23,24 @@ const OrderChildSchema = new mongoose.Schema(
     },
     cur: {
       type: Array,
+      cf1: {
+        type: String,
+      },
+      cd1: {
+        type: String,
+      },
+      cf2: {
+        type: String,
+      },
+      cd2: {
+        type: String,
+      },
+      cf3: {
+        type: String,
+      },
+      cd3: {
+        type: String,
+      },
     },
     age: {
       type: String,
