@@ -3,6 +3,7 @@ import Event from "../models/Event.js";
 import User from "../models/Users.js";
 import Nomination from "../models/Nomination.js";
 import NomE from "../models/NomE.js";
+import OrdersChild from "../models/OrderChild.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -312,6 +313,16 @@ const deleteNom = async (req, res) => {
   res.status(StatusCodes.OK).json(noms);
 };
 
+const getChildOrders = async (req, res) => {
+  let ordersChild;
+  try {
+    ordersChild = await OrdersChild.find({});
+    res.status(StatusCodes.OK).json(ordersChild);
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
 export {
   login,
   createEvent,
@@ -322,4 +333,5 @@ export {
   createNom,
   getNom,
   deleteNom,
+  getChildOrders,
 };

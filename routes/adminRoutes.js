@@ -10,6 +10,7 @@ import {
   createNom,
   getNom,
   deleteNom,
+  getChildOrders,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -33,5 +34,7 @@ router.route("/createnom").post(createNom);
 router.route("/getnom").get(getNom);
 
 router.route("/deletenom/:id").delete(deleteNom);
+
+router.route("/getChildOrders").get(getChildOrders);
 
 export default router;
