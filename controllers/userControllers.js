@@ -2,6 +2,8 @@ import User from "../models/Users.js";
 import Event from "../models/Event.js";
 import NomE from "../models/NomE.js";
 import Nomination from "../models/Nomination.js";
+import OrderChild from "../models/OrderChild.js";
+("../models/OrderChild");
 import { StatusCodes } from "http-status-codes";
 
 import {
@@ -73,4 +75,9 @@ const changePass = async (req, res) => {
   res.status(StatusCodes.OK).json({ user, token });
 };
 
-export { editUser, getEvent, changePass };
+const createChildOrder = async (req, res) => {
+  console.log(req.files["file"][0].path);
+  console.log(req.files["file2"][0].path);
+};
+
+export { editUser, getEvent, changePass, createChildOrder };
