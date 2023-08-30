@@ -22,25 +22,7 @@ const OrderChildSchema = new mongoose.Schema(
       type: String,
     },
     cur: {
-      type: Array,
-      cf1: {
-        type: String,
-      },
-      cd1: {
-        type: String,
-      },
-      cf2: {
-        type: String,
-      },
-      cd2: {
-        type: String,
-      },
-      cf3: {
-        type: String,
-      },
-      cd3: {
-        type: String,
-      },
+      type: String,
     },
     age: {
       type: String,
