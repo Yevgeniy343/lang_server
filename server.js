@@ -40,7 +40,7 @@ mongoose
     `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.a48edk3.mongodb.net/lang`
   )
   .then(() => {
-    app.listen(1000);
+    app.listen(process.env.PORT || 1000);
     console.log("Server has been started, DB connected");
   })
   .catch((err) => {
