@@ -40,6 +40,9 @@ const UserSchema = new mongoose.Schema(
       required: [true, "Please provide password"],
       trim: true,
     },
+    referal: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
