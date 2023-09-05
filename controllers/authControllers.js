@@ -9,7 +9,7 @@ import { generate } from "random-words";
 import { nanoid } from "nanoid";
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, ref } = req.body;
   const referal = nanoid();
   console.log(referal);
   if (!name || !email || !password) {
@@ -19,7 +19,13 @@ const signup = async (req, res) => {
   if (userAlreadyExist) {
     throw new BadRequestError("Email уже используется");
   }
-  const user = await User.create({ name, email, password, referal });
+  const user = await User.create({
+    name,
+    email,
+    password,
+    referal,
+    from_ref: ref,
+  });
   const token = user.createJWT();
   res.status(StatusCodes.CREATED).json({
     user: {
@@ -27,6 +33,7 @@ const signup = async (req, res) => {
       name: user.name,
       _id: user._id,
       referal: user.referal,
+      from_ref: user.from_ref,
     },
     token,
   });

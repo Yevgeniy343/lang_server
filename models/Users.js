@@ -43,6 +43,9 @@ const UserSchema = new mongoose.Schema(
     referal: {
       type: String,
     },
+    from_ref: {
+      type: String,
+    },
   },
   { timestamps: true }
 );
