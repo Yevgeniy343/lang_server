@@ -4,6 +4,7 @@ import User from "../models/Users.js";
 import Nomination from "../models/Nomination.js";
 import NomE from "../models/NomE.js";
 import OrdersChild from "../models/OrderChild.js";
+import OrderAdult from "../models/OrderAdult.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -323,6 +324,16 @@ const getChildOrders = async (req, res) => {
   }
 };
 
+const getAdultOrders = async (req, res) => {
+  let ordersAdult;
+  try {
+    ordersAdult = await OrderAdult.find({});
+    res.status(StatusCodes.OK).json(ordersAdult);
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
 export {
   login,
   createEvent,
@@ -334,4 +345,5 @@ export {
   getNom,
   deleteNom,
   getChildOrders,
+  getAdultOrders,
 };
