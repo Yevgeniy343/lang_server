@@ -18,5 +18,11 @@ router
     fileUpload.fields([{ name: "file" }, { name: "file2" }]),
     createChildOrder
   );
+router
+  .route("/createAdultOrder")
+  .post(
+    fileUpload.fields([{ name: "file" }, { name: "file2" }]),
+    createChildOrder
+  );
 
 export default router;

@@ -3,6 +3,7 @@ import Event from "../models/Event.js";
 import NomE from "../models/NomE.js";
 import Nomination from "../models/Nomination.js";
 import OrderChild from "../models/OrderChild.js";
+import OrderAdult from "../models/OrderAdult.js";
 ("../models/OrderChild");
 import { StatusCodes } from "http-status-codes";
 
@@ -141,6 +142,11 @@ const createChildOrder = async (req, res) => {
     throw new BadRequestError("Error 500!");
   }
   res.status(StatusCodes.CREATED).json(orderChild);
+};
+
+const createAdultOrder = async (req, res) => {
+  console.log(req.body);
+  console.log(req.params);
 };
 
 export { editUser, getEvent, changePass, createChildOrder };
