@@ -30,7 +30,46 @@ const OrderChildSchema = new mongoose.Schema(
     subject: {
       type: String,
     },
+    subject2: {
+      type: String,
+    },
+    subject3: {
+      type: String,
+    },
     punct: {
+      type: String,
+    },
+    punct2: {
+      type: String,
+    },
+    punct3: {
+      type: String,
+    },
+    job: {
+      type: String,
+    },
+    job2: {
+      type: String,
+    },
+    job3: {
+      type: String,
+    },
+    job_title: {
+      type: String,
+    },
+    job_title2: {
+      type: String,
+    },
+    job_title3: {
+      type: String,
+    },
+    internship: {
+      type: String,
+    },
+    internship2: {
+      type: String,
+    },
+    internship3: {
       type: String,
     },
     graduate: {
