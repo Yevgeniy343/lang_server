@@ -7,6 +7,7 @@ import {
   getEvent,
   changePass,
   createChildOrder,
+  createAdultOrder,
 } from "../controllers/userControllers.js";
 
 router.route("/edit_user").post(editUser);
@@ -22,7 +23,7 @@ router
   .route("/createAdultOrder")
   .post(
     fileUpload.fields([{ name: "file" }, { name: "file2" }]),
-    createChildOrder
+    createAdultOrder
   );
 
 export default router;

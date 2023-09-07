@@ -146,7 +146,95 @@ const createChildOrder = async (req, res) => {
 
 const createAdultOrder = async (req, res) => {
   console.log(req.body);
-  console.log(req.params);
+  console.log(req.files);
+  const {
+    eventId,
+    name,
+    name2,
+    name3,
+    part,
+    curatorsAmount,
+    cur,
+    age,
+    subject,
+    subject2,
+    subject3,
+    punct,
+    punct2,
+    punct3,
+    job,
+    job2,
+    job3,
+    job_title,
+    job_title2,
+    job_title3,
+    internship,
+    internship2,
+    internship3,
+    graduate,
+    nomPul,
+    language,
+    language2,
+    link,
+    email,
+    phone,
+    extra1,
+    extra2,
+    extra3,
+  } = req.body;
+  if (!eventId || !name) {
+    throw new BadRequestError("Введите все значения");
+  }
+  let orderAdult;
+  try {
+    orderAdult = await OrderAdult.create({
+      eventId: eventId,
+      name: name,
+      name2: name2,
+      name3: name3,
+      part: part,
+      curatorsAmount: curatorsAmount,
+      cur: cur,
+      age: age,
+      subject: subject,
+      subject2: subject2,
+      subject3: subject3,
+      punct: punct,
+      punct2: punct2,
+      punct3: punct3,
+      job: job,
+      job2: job2,
+      job3: job3,
+      job_title: job_title,
+      job_title2: job_title2,
+      job_title3: job_title3,
+      internship: internship,
+      internship2: internship2,
+      internship3: internship3,
+      graduate: graduate,
+      nomPul: nomPul,
+      language: language,
+      language2: language2,
+      link: link,
+      email: email,
+      phone: phone,
+      extra1: extra1,
+      extra2: extra2,
+      extra3: extra3,
+      // file: req.files["file"][0].path,
+      file:
+        req.files && req.files["file"] && req.files["file"][0]
+          ? req.files["file"][0].path
+          : null,
+      file2:
+        req.files && req.files["file2"] && req.files["file2"][0]
+          ? req.files["file2"][0].path
+          : null,
+    });
+  } catch (error) {
+    throw new BadRequestError("Error 500!");
+  }
+  res.status(StatusCodes.CREATED).json(orderAdult);
 };
 
-export { editUser, getEvent, changePass, createChildOrder };
+export { editUser, getEvent, changePass, createChildOrder, createAdultOrder };
