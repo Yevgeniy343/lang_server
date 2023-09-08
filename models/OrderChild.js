@@ -72,6 +72,9 @@ const OrderChildSchema = new mongoose.Schema(
     extra3: {
       type: String,
     },
+    number: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

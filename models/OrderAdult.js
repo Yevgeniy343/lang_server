@@ -6,6 +6,9 @@ const OrderAdultSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide eventId"],
     },
+    number: {
+      type: String,
+    },
     name: {
       type: String,
     },
