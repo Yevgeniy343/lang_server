@@ -15,6 +15,9 @@ const OrderChildSchema = new mongoose.Schema(
     name3: {
       type: String,
     },
+    tarif: {
+      type: String,
+    },
     part: {
       type: String,
     },

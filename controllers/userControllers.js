@@ -83,6 +83,7 @@ const createChildOrder = async (req, res) => {
   const {
     eventId,
     name,
+    tarif,
     name2,
     name3,
     part,
@@ -110,6 +111,7 @@ const createChildOrder = async (req, res) => {
     orderChild = await OrderChild.create({
       eventId: eventId,
       name: name,
+      tarif: tarif,
       name2: name2,
       name3: name3,
       part: part,
@@ -150,6 +152,7 @@ const createAdultOrder = async (req, res) => {
   const {
     eventId,
     name,
+    tarif,
     name2,
     name3,
     part,
@@ -190,6 +193,7 @@ const createAdultOrder = async (req, res) => {
     orderAdult = await OrderAdult.create({
       eventId: eventId,
       name: name,
+      tarif: tarif,
       name2: name2,
       name3: name3,
       part: part,
