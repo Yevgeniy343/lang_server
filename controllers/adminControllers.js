@@ -329,6 +329,7 @@ const getAdultOrders = async (req, res) => {
   try {
     ordersAdult = await OrderAdult.find({});
     res.status(StatusCodes.OK).json(ordersAdult);
+    console.log(ordersAdult);
   } catch (error) {
     throw new BadRequestError("Ошибка 500!");
   }

@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const OrderChildSchema = new mongoose.Schema(
+const OrderAdultSchema = new mongoose.Schema(
   {
     eventId: {
       type: String,
@@ -112,4 +112,4 @@ const OrderChildSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-export default mongoose.model("OrderChild", OrderChildSchema);
+export default mongoose.model("OrderAdult", OrderAdultSchema);
