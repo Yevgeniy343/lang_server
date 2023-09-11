@@ -79,7 +79,6 @@ const changePass = async (req, res) => {
 const createChildOrder = async (req, res) => {
   // console.log(req.files["file"][0].path);
   // console.log(req.files["file2"][0].path);
-  console.log(req.body);
   const {
     eventId,
     name,
