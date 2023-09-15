@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const JurySchema = new mongoose.Schema(
   {
-    // name: { type: String, required: [true, "Please provide name"], trim: true },
+    name: { type: String, required: [true, "Please provide name"], trim: true },
     // second_name: { type: String, trim: true },
     // phone: {
     //   type: String,
