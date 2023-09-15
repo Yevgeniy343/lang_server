@@ -63,6 +63,10 @@ const EventSchema = new mongoose.Schema(
       type: Number,
       required: [true, "Please provide price"],
     },
+    index: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );

@@ -41,7 +41,9 @@ const createEvent = async (req, res) => {
     tarif_3a,
     supervisor,
     diplom,
+    index,
   } = req.body;
+  console.log(index);
 
   if (
     !name ||
@@ -77,6 +79,7 @@ const createEvent = async (req, res) => {
     tarif_3a: tarif_3a,
     supervisor: supervisor,
     diplom: diplom,
+    // index: Number(index) + 1,
     pdf: req.files["file"][0].path,
     image: req.files["image"][0].path,
   });
@@ -86,6 +89,7 @@ const createEvent = async (req, res) => {
     adultNoms: req.body.adultNom,
     eventId: event._id,
   });
+
   res.status(StatusCodes.CREATED).json(event);
 };
 

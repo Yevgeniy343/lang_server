@@ -11,10 +11,12 @@ import path from "path";
 import authRouter from "./routes/authRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import juryRouter from "./routes/juryRoutes.js";
 
 import notFoundMiddleware from "./middleware/not-found.js";
 import errorHandlerMiddleware from "./middleware/error-handler.js";
 import authenticateUser from "./middleware/auth.js";
+import authenticateJury from "./middleware/authJury.js";
 
 app.use(cors());
 app.use(express.json());
@@ -29,6 +31,7 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", authenticateUser, userRouter);
 app.use("/api/admin", adminRouter);
+app.use("/api/jury-auth", juryRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
