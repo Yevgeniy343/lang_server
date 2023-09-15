@@ -9,9 +9,7 @@ import { generate } from "random-words";
 import { nanoid } from "nanoid";
 
 const signup = async (req, res) => {
-  const { name, email, password, ref } = req.body;
-  const referal = nanoid();
-  console.log(referal);
+  const { name, email, password } = req.body;
   if (!name || !email || !password) {
     throw new BadRequestError("Введите все значения");
   }
@@ -23,8 +21,6 @@ const signup = async (req, res) => {
     name,
     email,
     password,
-    referal,
-    from_ref: ref,
   });
   const tokenJ = jury.createJWT();
   res.status(StatusCodes.CREATED).json({
@@ -32,8 +28,6 @@ const signup = async (req, res) => {
       email: jury.email,
       name: jury.name,
       _id: jury._id,
-      referal: jury.referal,
-      from_ref: jury.from_ref,
     },
     tokenJ,
   });
