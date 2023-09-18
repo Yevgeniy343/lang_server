@@ -446,7 +446,7 @@ const updateAdultOrder = async (req, res) => {
     order.name = name;
     order.name2 = name2;
     order.name3 = name3;
-    order.tarif - tarif;
+    order.tarif = tarif;
     order.part = part;
     order.curatorsAmount = curatorsAmount;
     order.cur = cur;
@@ -476,7 +476,9 @@ const updateAdultOrder = async (req, res) => {
     order.extra2 = extra2;
     order.extra3 = extra3;
     await order.save();
-    res.status(StatusCodes.OK).json(order);
+    // res.status(StatusCodes.OK).json(order);
+    let ordersAdult = await OrderAdult.find({});
+    res.status(StatusCodes.OK).json({ order, ordersAdult });
   } catch (error) {
     throw new BadRequestError("Internal server error");
   }
