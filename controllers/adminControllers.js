@@ -11,6 +11,7 @@ import {
   BadRequestError,
   UnAuthenticatedError,
 } from "../errors/index-errors.js";
+import nodemailer from "nodemailer";
 
 const login = async (req, res) => {
   const { login, password } = req.body;
@@ -497,6 +498,40 @@ const updateStatusOrder = async (req, res) => {
     res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
   } catch (error) {
     throw new BadRequestError("Internal server error");
+  }
+
+  if (req.body.status === "declined") {
+    console.log(req.body.decline);
+    console.log(req.body.email);
+    try {
+      var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "kronujin@gmail.com",
+          pass: process.env.APP,
+        },
+      });
+
+      var mailOptions = {
+        from: "kronujin@gmail.com",
+        to: `${req.body.email}`,
+        subject: "Заявка отклонена",
+        text: "",
+        html: `<p style="color:#6b2351">${req.body.decline}</p1>`,
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          console.log(error);
+          res.status(StatusCodes.OK).json(error);
+        } else {
+          console.log("Email sent: " + info.response);
+          res.status(StatusCodes.OK).json("Email sent: " + info.response);
+        }
+      });
+    } catch (error) {
+      throw new BadRequestError("Error 500 !");
+    }
   }
 };
 
