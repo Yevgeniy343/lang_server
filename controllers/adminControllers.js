@@ -398,12 +398,13 @@ const updateChildrenOrder = async (req, res) => {
 };
 
 const updateAdultOrder = async (req, res) => {
-  console.log(req.body);
+  console.log(req.body.status);
   const {
     orderId,
     number,
     eventId,
     name,
+    status,
     tarif,
     name2,
     name3,
@@ -443,6 +444,7 @@ const updateAdultOrder = async (req, res) => {
       return res.status(StatusCodes.NOT_FOUND).json("Order not found");
     }
     // order.eventId = eventId;
+    order.status = status;
     order.name = name;
     order.name2 = name2;
     order.name3 = name3;
@@ -484,6 +486,20 @@ const updateAdultOrder = async (req, res) => {
   }
 };
 
+const updateStatusOrder = async (req, res) => {
+  console.log(req.body);
+  try {
+    let order = await OrderAdult.findByIdAndUpdate(req.body.orderId, {
+      status: req.body.status,
+    });
+    let ordersAdult = await OrderAdult.find({});
+    let ordersChild = await OrderAdult.find({});
+    res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
+  } catch (error) {
+    throw new BadRequestError("Internal server error");
+  }
+};
+
 export {
   login,
   createEvent,
@@ -498,4 +514,5 @@ export {
   getAdultOrders,
   updateChildrenOrder,
   updateAdultOrder,
+  updateStatusOrder,
 };
