@@ -5,6 +5,7 @@ import Nomination from "../models/Nomination.js";
 import NomE from "../models/NomE.js";
 import OrdersChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
+import Reason from "../models/Reason.js";
 import { StatusCodes } from "http-status-codes";
 import fs from "fs";
 import {
@@ -535,6 +536,15 @@ const updateStatusOrder = async (req, res) => {
   }
 };
 
+const getReasons = async (req, res) => {
+  try {
+    let reasons = await Reason.find({});
+    res.status(StatusCodes.OK).json(reasons);
+  } catch (error) {
+    throw new BadRequestError("Error 500 !");
+  }
+};
+
 export {
   login,
   createEvent,
@@ -550,4 +560,5 @@ export {
   updateChildrenOrder,
   updateAdultOrder,
   updateStatusOrder,
+  getReasons,
 };
