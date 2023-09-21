@@ -391,7 +391,7 @@ const updateChildrenOrder = async (req, res) => {
       (order.extra1 = extra1),
       (order.extra2 = extra2),
       (order.extra3 = extra3),
-      (order.number = number),
+      // (order.number = number),
       await order.save();
     res.status(StatusCodes.OK).json(order);
   } catch (error) {
@@ -494,8 +494,13 @@ const updateStatusOrder = async (req, res) => {
     let order = await OrderAdult.findByIdAndUpdate(req.body.orderId, {
       status: req.body.status,
     });
+    if (!order) {
+      let order = await OrdersChild.findByIdAndUpdate(req.body.orderId, {
+        status: req.body.status,
+      });
+    }
     let ordersAdult = await OrderAdult.find({});
-    let ordersChild = await OrderAdult.find({});
+    let ordersChild = await OrdersChild.find({});
     res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
   } catch (error) {
     throw new BadRequestError("Internal server error");

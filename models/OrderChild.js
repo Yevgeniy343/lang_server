@@ -9,6 +9,13 @@ const OrderChildSchema = new mongoose.Schema(
     name: {
       type: String,
     },
+    number: {
+      type: String,
+    },
+    status: {
+      type: String,
+      default: "pending",
+    },
     name2: {
       type: String,
     },
