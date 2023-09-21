@@ -393,7 +393,8 @@ const updateChildrenOrder = async (req, res) => {
       (order.extra3 = extra3),
       // (order.number = number),
       await order.save();
-    res.status(StatusCodes.OK).json(order);
+    let ordersChild = await OrdersChild.find({});
+    res.status(StatusCodes.OK).json({ order, ordersChild });
   } catch (error) {
     throw new BadRequestError("Internal server error");
   }
