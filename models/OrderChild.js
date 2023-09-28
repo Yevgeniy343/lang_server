@@ -6,6 +6,10 @@ const OrderChildSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide eventId"],
     },
+    userId: {
+      type: String,
+      required: [true, "Please provide userId"],
+    },
     name: {
       type: String,
     },

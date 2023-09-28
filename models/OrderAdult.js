@@ -6,6 +6,10 @@ const OrderAdultSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide eventId"],
     },
+    userId: {
+      type: String,
+      required: [true, "Please provide userId"],
+    },
     status: {
       type: String,
       default: "pending",

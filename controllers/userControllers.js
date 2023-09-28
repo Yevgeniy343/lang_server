@@ -103,6 +103,7 @@ const createChildOrder = async (req, res) => {
     extra2,
     extra3,
     number,
+    userId,
   } = req.body;
   if (!eventId || !name) {
     throw new BadRequestError("Введите все значения");
@@ -132,6 +133,7 @@ const createChildOrder = async (req, res) => {
       extra2: extra2,
       extra3: extra3,
       number: number,
+      userId: userId,
       // file: req.files["file"][0].path,
       file:
         req.files && req.files["file"] && req.files["file"][0]
@@ -187,6 +189,7 @@ const createAdultOrder = async (req, res) => {
     extra1,
     extra2,
     extra3,
+    userId,
   } = req.body;
   if (!eventId || !name) {
     throw new BadRequestError("Введите все значения");
@@ -229,6 +232,7 @@ const createAdultOrder = async (req, res) => {
       extra1: extra1,
       extra2: extra2,
       extra3: extra3,
+      userId: userId,
 
       // file: req.files["file"][0].path,
       file:
