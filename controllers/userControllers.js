@@ -324,6 +324,96 @@ const updateChildrenOrder = async (req, res) => {
   }
 };
 
+const updateAdultOrder = async (req, res) => {
+  console.log(req.body);
+  const {
+    userId,
+    orderId,
+    number,
+    eventId,
+    name,
+    status,
+    tarif,
+    name2,
+    name3,
+    part,
+    curatorsAmount,
+    cur,
+    subject,
+    subject2,
+    subject3,
+    punct,
+    punct2,
+    punct3,
+    job,
+    job2,
+    job3,
+    job_title,
+    job_title2,
+    job_title3,
+    internship,
+    internship2,
+    internship3,
+    graduate,
+    nomPul,
+    language,
+    language2,
+    link,
+    email,
+    phone,
+    extra1,
+    extra2,
+    extra3,
+  } = req.body;
+  try {
+    let order = await OrderAdult.findById(orderId);
+    if (!order) {
+      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+    }
+    // order.eventId = eventId;
+    // order.status = status;
+    order.name = name;
+    order.name2 = name2;
+    order.name3 = name3;
+    order.tarif = tarif;
+    order.part = part;
+    order.curatorsAmount = curatorsAmount;
+    order.cur = cur;
+    order.subject = subject;
+    order.subject2 = subject2;
+    order.subject3 = subject3;
+    order.punct = punct;
+    order.punct2 = punct2;
+    order.punct3 = punct3;
+    order.job = job;
+    order.job2 = job2;
+    order.job3 = job3;
+    order.job_title = job_title;
+    order.job_title2 = job_title2;
+    order.job_title3 = job_title3;
+    order.internship = internship;
+    order.internship2 = internship2;
+    order.internship3 = internship3;
+    order.graduate = graduate;
+    order.nomPul = nomPul;
+    order.language = language;
+    order.language2 = language2;
+    order.link = link;
+    order.email = email;
+    order.phone = phone;
+    order.extra1 = extra1;
+    order.extra2 = extra2;
+    order.extra3 = extra3;
+    await order.save();
+
+    let adultOrders = await OrderAdult.find({ userId: userId });
+
+    res.status(StatusCodes.OK).json(adultOrders);
+  } catch (error) {
+    throw new BadRequestError("Internal server error");
+  }
+};
+
 export {
   editUser,
   getEvent,
@@ -332,4 +422,5 @@ export {
   createAdultOrder,
   getAllOrders,
   updateChildrenOrder,
+  updateAdultOrder,
 };
