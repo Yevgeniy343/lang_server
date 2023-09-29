@@ -250,4 +250,29 @@ const createAdultOrder = async (req, res) => {
   res.status(StatusCodes.CREATED).json(orderAdult);
 };
 
-export { editUser, getEvent, changePass, createChildOrder, createAdultOrder };
+const getAllOrders = async (req, res) => {
+  console.log(req.params);
+  try {
+    let childOrders = await OrderChild.find({ userId: req.params.userId });
+    let adultOrders = await OrderAdult.find({ userId: req.params.userId });
+    console.log(childOrders);
+    console.log(adultOrders);
+    res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
+  } catch (error) {
+    throw new BadRequestError("Internal server Error!");
+  }
+};
+
+const updateChildrenOrder = async (req, res) => {
+  console.log(req.body);
+};
+
+export {
+  editUser,
+  getEvent,
+  changePass,
+  createChildOrder,
+  createAdultOrder,
+  getAllOrders,
+  updateChildrenOrder,
+};

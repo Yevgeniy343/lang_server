@@ -8,6 +8,8 @@ import {
   changePass,
   createChildOrder,
   createAdultOrder,
+  getAllOrders,
+  updateChildrenOrder,
 } from "../controllers/userControllers.js";
 
 router.route("/edit_user").post(editUser);
@@ -25,5 +27,7 @@ router
     fileUpload.fields([{ name: "file" }, { name: "file2" }]),
     createAdultOrder
   );
+router.route("/getAllOrders/:userId").get(getAllOrders);
+router.route("/editChildrenOrder").patch(updateChildrenOrder);
 
 export default router;
