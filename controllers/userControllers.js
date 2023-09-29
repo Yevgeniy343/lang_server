@@ -265,6 +265,64 @@ const getAllOrders = async (req, res) => {
 
 const updateChildrenOrder = async (req, res) => {
   console.log(req.body);
+  const {
+    userId,
+    orderId,
+    eventId,
+    name,
+    tarif,
+    name2,
+    name3,
+    part,
+    curatorsAmount,
+    cur,
+    age,
+    subject,
+    punct,
+    graduate,
+    nomPul,
+    language,
+    language2,
+    link,
+    email,
+    phone,
+    extra1,
+    extra2,
+    extra3,
+  } = req.body;
+  try {
+    let order = await OrderChild.findById(orderId);
+
+    if (!order) {
+      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+    }
+    (order.name = name),
+      (order.tarif = tarif),
+      (order.name2 = name2),
+      (order.name3 = name3),
+      (order.part = part),
+      (order.curatorsAmount = curatorsAmount),
+      (order.cur = cur),
+      (order.age = age),
+      (order.subject = subject),
+      (order.punct = punct),
+      (order.graduate = graduate),
+      (order.nomPul = nomPul),
+      (order.language = language),
+      (order.language2 = language2),
+      (order.link = link),
+      (order.email = email),
+      (order.phone = phone),
+      (order.extra1 = extra1),
+      (order.extra2 = extra2),
+      (order.extra3 = extra3),
+      await order.save();
+    let ordersChild = await OrderChild.find({});
+    let childOrders = await OrderChild.find({ userId: userId });
+    res.status(StatusCodes.OK).json(childOrders);
+  } catch (error) {
+    throw new BadRequestError("Internal server error");
+  }
 };
 
 export {

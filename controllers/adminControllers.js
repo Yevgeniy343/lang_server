@@ -391,7 +391,6 @@ const updateChildrenOrder = async (req, res) => {
       (order.extra1 = extra1),
       (order.extra2 = extra2),
       (order.extra3 = extra3),
-      // (order.number = number),
       await order.save();
     let ordersChild = await OrdersChild.find({});
     res.status(StatusCodes.OK).json({ order, ordersChild });
