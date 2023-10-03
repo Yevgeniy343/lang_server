@@ -110,7 +110,7 @@ const remind = async (req, res) => {
     var mailOptions = {
       from: "kronujin@gmail.com",
       to: `${remind_email}`,
-      subject: "Новый пароль",
+      subject: "Новый пароль для жюри",
       text: "",
       html: `<h1 style="color:#a6a28e">${new_pass}</h1>`,
     };
@@ -135,4 +135,32 @@ const remind = async (req, res) => {
     .json({ msg: "Сгенерированный пароль отправлен на указанный Email" });
 };
 
-export { signup, login, remind };
+const changePass = async (req, res) => {
+  const { id, pass, pass1, pass2 } = req.body;
+  console.log(req.body);
+  // let user;
+  // try {
+  //   user = await User.findById(id);
+  // } catch (error) {
+  //   throw new BadRequestError("Ошибка 500!");
+  // }
+
+  // if (pass1 !== pass2) {
+  //   throw new BadRequestError("Введенные пароли не совпадают !");
+  // }
+
+  // const isPasswordCorrect = await user.comparePassword(pass);
+
+  // if (!isPasswordCorrect) {
+  //   throw new BadRequestError("Текущий пароль указан не верно !");
+  // }
+
+  // user.password = pass1;
+  // await user.save();
+
+  // user = await User.findById(id);
+  // const token = user.createJWT();
+  // res.status(StatusCodes.OK).json({ user, token });
+};
+
+export { signup, login, remind, changePass };
