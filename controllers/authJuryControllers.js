@@ -9,7 +9,20 @@ import { generate } from "random-words";
 import { nanoid } from "nanoid";
 
 const signup = async (req, res) => {
-  const { name, email, password } = req.body;
+  console.log(req.body);
+  const {
+    name,
+    email,
+    password,
+    sp,
+    lang,
+    nomins,
+    subj,
+    spOther,
+    oy,
+    punct,
+    phone,
+  } = req.body;
   if (!name || !email || !password) {
     throw new BadRequestError("Введите все значения");
   }
@@ -21,6 +34,14 @@ const signup = async (req, res) => {
     name,
     email,
     password,
+    sp,
+    nomins,
+    subj,
+    spOther,
+    oy,
+    punct,
+    phone,
+    lang,
   });
   const tokenJ = jury.createJWT();
   res.status(StatusCodes.CREATED).json({
@@ -28,6 +49,14 @@ const signup = async (req, res) => {
       email: jury.email,
       name: jury.name,
       _id: jury._id,
+      sp: jury.sp,
+      nomins: jury.nomins,
+      subj: jury.subj,
+      spOther: jury.spOther,
+      oy: jury.oy,
+      punct: jury.punct,
+      phone: jury.phone,
+      lang: jury.leng,
     },
     tokenJ,
   });

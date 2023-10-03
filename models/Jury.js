@@ -6,22 +6,6 @@ import jwt from "jsonwebtoken";
 const JurySchema = new mongoose.Schema(
   {
     name: { type: String, required: [true, "Please provide name"], trim: true },
-    // second_name: { type: String, trim: true },
-    // phone: {
-    //   type: String,
-    // },
-    // date: {
-    //   type: String,
-    // },
-    // city: {
-    //   type: String,
-    // },
-    // job: {
-    //   type: String,
-    // },
-    // job_title: {
-    //   type: String,
-    // },
 
     email: {
       type: String,
@@ -38,12 +22,34 @@ const JurySchema = new mongoose.Schema(
       required: [true, "Please provide password"],
       trim: true,
     },
-    // referal: {
-    //   type: String,
-    // },
-    // from_ref: {
-    //   type: String,
-    // },
+    sp: {
+      type: String,
+    },
+    lang: {
+      type: String,
+    },
+    nomins: {
+      type: String,
+    },
+    spOther: {
+      type: String,
+    },
+    oy: {
+      type: String,
+    },
+    punct: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    subj: {
+      type: String,
+    },
+    stars: {
+      type: Number,
+      default: 0,
+    },
   },
   { timestamps: true }
 );
