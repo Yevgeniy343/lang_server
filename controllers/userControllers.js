@@ -4,7 +4,6 @@ import NomE from "../models/NomE.js";
 import Nomination from "../models/Nomination.js";
 import OrderChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
-("../models/OrderChild");
 import { StatusCodes } from "http-status-codes";
 
 import {
@@ -325,7 +324,7 @@ const updateChildrenOrder = async (req, res) => {
 };
 
 const updateAdultOrder = async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   const {
     userId,
     orderId,
