@@ -11,6 +11,7 @@ import path from "path";
 import authRouter from "./routes/authRoutes.js";
 import adminRouter from "./routes/adminRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import jury_authRouter from "./routes/jury-authRoutes.js";
 import juryRouter from "./routes/juryRoutes.js";
 
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -31,7 +32,8 @@ app.get("/", (req, res) => {
 app.use("/api/auth", authRouter);
 app.use("/api/user", authenticateUser, userRouter);
 app.use("/api/admin", adminRouter);
-app.use("/api/jury-auth", juryRouter);
+app.use("/api/jury-auth", jury_authRouter);
+app.use("/api/jury", authenticateJury, juryRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
