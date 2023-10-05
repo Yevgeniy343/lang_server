@@ -1,4 +1,6 @@
 import Jury from "../models/Jury.js";
+import OrderChild from "../models/OrderChild.js";
+import OrderAdult from "../models/OrderAdult.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -36,4 +38,15 @@ const changePass = async (req, res) => {
   res.status(StatusCodes.OK).json({ jury, token });
 };
 
-export { changePass };
+const getOrders = async (req, res) => {
+  console.log(req.params);
+  try {
+    let childOrders = await OrderChild.find({});
+    let adultOrders = await OrderAdult.find({});
+    res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
+export { changePass, getOrders };
