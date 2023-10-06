@@ -324,7 +324,7 @@ const updateChildrenOrder = async (req, res) => {
 };
 
 const updateAdultOrder = async (req, res) => {
-  // console.log(req.body);
+  console.log(req.body);
   const {
     userId,
     orderId,
