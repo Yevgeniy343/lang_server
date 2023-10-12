@@ -10,6 +10,8 @@ import {
   BadRequestError,
   UnAuthenticatedError,
 } from "../errors/index-errors.js";
+import nodemailer from "nodemailer";
+import { generate } from "random-words";
 
 const editUser = async (req, res) => {
   const { name, email, phone, second_name, date, city, job, job_title, id } =
@@ -78,7 +80,6 @@ const changePass = async (req, res) => {
 const createChildOrder = async (req, res) => {
   // console.log(req.files["file"][0].path);
   // console.log(req.files["file2"][0].path);
-  console.log(req.body);
   const {
     eventId,
     name,
@@ -103,6 +104,7 @@ const createChildOrder = async (req, res) => {
     extra3,
     number,
     userId,
+    eventName,
   } = req.body;
   if (!eventId || !name) {
     throw new BadRequestError("Введите все значения");
@@ -133,6 +135,7 @@ const createChildOrder = async (req, res) => {
       extra3: extra3,
       number: number,
       userId: userId,
+
       // file: req.files["file"][0].path,
       file:
         req.files && req.files["file"] && req.files["file"][0]
@@ -143,6 +146,39 @@ const createChildOrder = async (req, res) => {
           ? req.files["file2"][0].path
           : null,
     });
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "kronujin@gmail.com",
+        pass: process.env.APP,
+      },
+    });
+
+    var mailOptions = {
+      from: "kronujin@gmail.com",
+      to: `${email}`,
+      subject: "Информация по заявке",
+      text: "",
+      html: `<p style="color:#6b2351">Уважаемый ${name}! </p1>
+      <p style="color:#6b2351">Благодарим за участие в ${eventName}</p> 
+      <p style="color:#6b2351">Ваша работа находится на модерации.</p>
+      <p style="color:#6b2351">Номер вашей заявки ${number} </p> 
+      <p style="color:#6b2351">В течение 3-х дней Вы получите уведомление принята работа или нет. Только оно является гарантом того, что работа дошла до адресата. </p>
+      <p style="color:#6b2351">Если уведомление не получено, повторите отправку заявки по прошествии трех дней. В противном случае Организатор не несет ответственность: работа в конкурсе не участвует,  а денежные средства за неё не возвращаются.</p> 
+      <p style="color:#6b2351">С уважением, команда Фонда «Язык предков» </p> 
+       `,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.status(StatusCodes.OK).json(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(StatusCodes.OK).json("Email sent: " + info.response);
+      }
+    });
   } catch (error) {
     throw new BadRequestError("Error 500!");
   }
@@ -150,8 +186,6 @@ const createChildOrder = async (req, res) => {
 };
 
 const createAdultOrder = async (req, res) => {
-  console.log(req.body);
-  console.log(req.files);
   const {
     number,
     eventId,
@@ -189,6 +223,7 @@ const createAdultOrder = async (req, res) => {
     extra2,
     extra3,
     userId,
+    eventName,
   } = req.body;
   if (!eventId || !name) {
     throw new BadRequestError("Введите все значения");
@@ -242,6 +277,39 @@ const createAdultOrder = async (req, res) => {
         req.files && req.files["file2"] && req.files["file2"][0]
           ? req.files["file2"][0].path
           : null,
+    });
+
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "kronujin@gmail.com",
+        pass: process.env.APP,
+      },
+    });
+
+    var mailOptions = {
+      from: "kronujin@gmail.com",
+      to: `${email}`,
+      subject: "Информация по заявке",
+      text: "",
+      html: `<p style="color:#6b2351">Уважаемый ${name}! </p1>
+      <p style="color:#6b2351">Благодарим за участие в ${eventName}</p> 
+      <p style="color:#6b2351">Ваша работа находится на модерации.</p>
+      <p style="color:#6b2351">Номер вашей заявки ${number} </p> 
+      <p style="color:#6b2351">В течение 3-х дней Вы получите уведомление принята работа или нет. Только оно является гарантом того, что работа дошла до адресата. </p>
+      <p style="color:#6b2351">Если уведомление не получено, повторите отправку заявки по прошествии трех дней. В противном случае Организатор не несет ответственность: работа в конкурсе не участвует,  а денежные средства за неё не возвращаются.</p> 
+      <p style="color:#6b2351">С уважением, команда Фонда «Язык предков» </p> 
+       `,
+    };
+
+    transporter.sendMail(mailOptions, function (error, info) {
+      if (error) {
+        console.log(error);
+        res.status(StatusCodes.OK).json(error);
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(StatusCodes.OK).json("Email sent: " + info.response);
+      }
     });
   } catch (error) {
     throw new BadRequestError("Error 500!");
