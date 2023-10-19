@@ -49,4 +49,20 @@ const getOrders = async (req, res) => {
   }
 };
 
-export { changePass, getOrders };
+const editProfile = async (req, res) => {
+  console.log(req.body);
+  const { name, email, lang, phone, nomins, id } = req.body;
+  let jury = await Jury.findById(id);
+  jury.name = name;
+  jury.email = email;
+  jury.phone = phone;
+  jury.nomins = nomins;
+  if (lang) {
+    jury.lang = lang;
+  }
+  await jury.save();
+  console.log(jury);
+  res.status(StatusCodes.CREATED).json(jury);
+};
+
+export { changePass, getOrders, editProfile };

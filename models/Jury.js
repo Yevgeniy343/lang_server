@@ -29,7 +29,7 @@ const JurySchema = new mongoose.Schema(
       type: String,
     },
     nomins: {
-      type: String,
+      type: Array,
     },
     spOther: {
       type: String,
