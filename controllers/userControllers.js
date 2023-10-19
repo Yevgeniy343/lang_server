@@ -182,7 +182,10 @@ const createChildOrder = async (req, res) => {
   } catch (error) {
     throw new BadRequestError("Error 500!");
   }
-  res.status(StatusCodes.CREATED).json(orderChild);
+  let childOrders = await OrderChild.find({ userId: userId });
+  res.status(StatusCodes.CREATED).json(childOrders);
+
+  // res.status(StatusCodes.CREATED).json(orderChild);
 };
 
 const createAdultOrder = async (req, res) => {
@@ -314,7 +317,10 @@ const createAdultOrder = async (req, res) => {
   } catch (error) {
     throw new BadRequestError("Error 500!");
   }
-  res.status(StatusCodes.CREATED).json(orderAdult);
+  let adultOrders = await OrderAdult.find({ userId: userId });
+  res.status(StatusCodes.CREATED).json(adultOrders);
+
+  // res.status(StatusCodes.CREATED).json(orderAdult);
 };
 
 const getAllOrders = async (req, res) => {
