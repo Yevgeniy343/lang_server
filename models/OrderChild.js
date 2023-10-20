@@ -86,6 +86,9 @@ const OrderChildSchema = new mongoose.Schema(
     number: {
       type: String,
     },
+    jury: {
+      type: Array,
+    },
   },
   { timestamps: true }
 );

@@ -9,6 +9,7 @@ import {
 import nodemailer from "nodemailer";
 import { generate } from "random-words";
 import { nanoid } from "nanoid";
+import _ from "lodash";
 
 const changePass = async (req, res) => {
   const { id, pass, pass1, pass2 } = req.body;
@@ -39,7 +40,6 @@ const changePass = async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
-  console.log(req.params);
   try {
     let childOrders = await OrderChild.find({});
     let adultOrders = await OrderAdult.find({});
@@ -50,7 +50,6 @@ const getOrders = async (req, res) => {
 };
 
 const editProfile = async (req, res) => {
-  console.log(req.body);
   const { name, email, lang, phone, nomins, id } = req.body;
   let jury = await Jury.findById(id);
   jury.name = name;
@@ -65,4 +64,26 @@ const editProfile = async (req, res) => {
   res.status(StatusCodes.CREATED).json(jury);
 };
 
-export { changePass, getOrders, editProfile };
+const check = async (req, res) => {
+  console.log(req.body);
+  let order;
+  order = await OrderChild.findById(req.body.orderId);
+  if (!order) {
+    order = await OrderAdult.findById(req.body.orderId);
+  }
+  order.jury = order.jury || [];
+
+  const include = _.includes(_.map(order.jury, "juryId"), req.body.juryId);
+  console.log(include);
+  if (include) {
+    throw new BadRequestError("Работа уже проверена !");
+  } else {
+    order.jury.push(req.body);
+    await order.save();
+    let childOrders = await OrderChild.find({});
+    let adultOrders = await OrderAdult.find({});
+    res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
+  }
+};
+
+export { changePass, getOrders, editProfile, check };

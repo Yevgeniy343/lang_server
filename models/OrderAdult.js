@@ -119,6 +119,9 @@ const OrderAdultSchema = new mongoose.Schema(
     extra3: {
       type: String,
     },
+    jury: {
+      type: Array,
+    },
   },
   { timestamps: true }
 );
