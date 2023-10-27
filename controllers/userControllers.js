@@ -5,6 +5,7 @@ import Nomination from "../models/Nomination.js";
 import OrderChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
 import { StatusCodes } from "http-status-codes";
+import Orderinfo from "../models/Orderinfo.js";
 
 import {
   BadRequestError,
@@ -155,18 +156,21 @@ const createChildOrder = async (req, res) => {
       },
     });
 
+    let text = await Orderinfo.findOne({});
+    console.log(text);
+
     var mailOptions = {
       from: "kronujin@gmail.com",
       to: `${email}`,
       subject: "Информация по заявке",
       text: "",
       html: `<p style="color:#6b2351">Уважаемый ${name}! </p1>
-      <p style="color:#6b2351">Благодарим за участие в ${eventName}</p> 
-      <p style="color:#6b2351">Ваша работа находится на модерации.</p>
-      <p style="color:#6b2351">Номер вашей заявки ${number} </p> 
-      <p style="color:#6b2351">В течение 3-х дней Вы получите уведомление принята работа или нет. Только оно является гарантом того, что работа дошла до адресата. </p>
-      <p style="color:#6b2351">Если уведомление не получено, повторите отправку заявки по прошествии трех дней. В противном случае Организатор не несет ответственность: работа в конкурсе не участвует,  а денежные средства за неё не возвращаются.</p> 
-      <p style="color:#6b2351">С уважением, команда Фонда «Язык предков» </p> 
+      <p style="color:#6b2351">${text.text1} ${eventName}</p> 
+      <p style="color:#6b2351">${text.text2}</p>
+      <p style="color:#6b2351">${text.text3} ${number} </p> 
+      <p style="color:#6b2351">${text.text4} </p>
+      <p style="color:#6b2351">${text.text5}</p> 
+      <p style="color:#6b2351">${text.text7} </p> 
        `,
     };
 
@@ -290,18 +294,21 @@ const createAdultOrder = async (req, res) => {
       },
     });
 
+    let text = await Orderinfo.findOne({});
+    console.log(text);
+
     var mailOptions = {
       from: "kronujin@gmail.com",
       to: `${email}`,
       subject: "Информация по заявке",
       text: "",
       html: `<p style="color:#6b2351">Уважаемый ${name}! </p1>
-      <p style="color:#6b2351">Благодарим за участие в ${eventName}</p> 
-      <p style="color:#6b2351">Ваша работа находится на модерации.</p>
-      <p style="color:#6b2351">Номер вашей заявки ${number} </p> 
-      <p style="color:#6b2351">В течение 3-х дней Вы получите уведомление принята работа или нет. Только оно является гарантом того, что работа дошла до адресата. </p>
-      <p style="color:#6b2351">Если уведомление не получено, повторите отправку заявки по прошествии трех дней. В противном случае Организатор не несет ответственность: работа в конкурсе не участвует,  а денежные средства за неё не возвращаются.</p> 
-      <p style="color:#6b2351">С уважением, команда Фонда «Язык предков» </p> 
+      <p style="color:#6b2351">${text.text1} ${eventName}</p> 
+      <p style="color:#6b2351">${text.text2}</p>
+      <p style="color:#6b2351">${text.text3} ${number} </p> 
+      <p style="color:#6b2351">${text.text4} </p>
+      <p style="color:#6b2351">${text.text5}</p> 
+      <p style="color:#6b2351">${text.text7} </p> 
        `,
     };
 
