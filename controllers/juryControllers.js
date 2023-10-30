@@ -1,6 +1,7 @@
 import Jury from "../models/Jury.js";
 import OrderChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
+import Event from "../models/Event.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -85,5 +86,11 @@ const check = async (req, res) => {
     res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
   }
 };
+const getEvents = async (req, res) => {
+  const events = await Event.find({});
+  // const noms = await NomE.find({});
+  // const nominations = await Nomination.find({});
+  res.status(StatusCodes.OK).json(events);
+};
 
-export { changePass, getOrders, editProfile, check };
+export { changePass, getOrders, editProfile, check, getEvents };
