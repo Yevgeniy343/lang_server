@@ -11,6 +11,7 @@ import {
   getAllOrders,
   updateChildrenOrder,
   updateAdultOrder,
+  getCondition,
 } from "../controllers/userControllers.js";
 
 router.route("/edit_user").post(editUser);
@@ -31,5 +32,7 @@ router
 router.route("/getAllOrders/:userId").get(getAllOrders);
 router.route("/editChildrenOrder").patch(updateChildrenOrder);
 router.route("/editAdultOrder").patch(updateAdultOrder);
+
+router.route("/getCondition").get(getCondition);
 
 export default router;

@@ -6,7 +6,7 @@ import OrderChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
 import { StatusCodes } from "http-status-codes";
 import Orderinfo from "../models/Orderinfo.js";
-
+import Condition from "../models/Condition.js";
 import {
   BadRequestError,
   UnAuthenticatedError,
@@ -494,6 +494,15 @@ const updateAdultOrder = async (req, res) => {
   }
 };
 
+const getCondition = async (req, res) => {
+  try {
+    let condition = await Condition.find({});
+    res.status(StatusCodes.OK).json(condition);
+  } catch (error) {
+    throw new BadRequestError("Internal server error");
+  }
+};
+
 export {
   editUser,
   getEvent,
@@ -503,4 +512,5 @@ export {
   getAllOrders,
   updateChildrenOrder,
   updateAdultOrder,
+  getCondition,
 };
