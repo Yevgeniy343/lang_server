@@ -51,9 +51,11 @@ const getOrders = async (req, res) => {
   try {
     let childOrders = await OrderChild.find({
       createdAt: { $lt: oneDayAgo },
+      status: "ok",
     });
     let adultOrders = await OrderAdult.find({
       createdAt: { $lt: oneDayAgo },
+      status: "ok",
     });
     res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
   } catch (error) {

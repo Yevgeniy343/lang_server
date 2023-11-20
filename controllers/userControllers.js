@@ -369,6 +369,7 @@ const updateChildrenOrder = async (req, res) => {
     extra1,
     extra2,
     extra3,
+    status,
   } = req.body;
   try {
     let order = await OrderChild.findById(orderId);
@@ -390,6 +391,7 @@ const updateChildrenOrder = async (req, res) => {
       (order.nomPul = nomPul),
       (order.language = language),
       (order.language2 = language2),
+      (order.status = status),
       (order.link = link),
       (order.email = email),
       (order.phone = phone),
@@ -479,6 +481,7 @@ const updateAdultOrder = async (req, res) => {
     order.language = language;
     order.language2 = language2;
     order.link = link;
+    order.status = status;
     order.email = email;
     order.phone = phone;
     order.extra1 = extra1;
