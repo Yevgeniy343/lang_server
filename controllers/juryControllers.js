@@ -41,9 +41,20 @@ const changePass = async (req, res) => {
 };
 
 const getOrders = async (req, res) => {
+  const today = new Date();
+  console.log(today);
+
+  const oneDayAgo = new Date(today);
+  oneDayAgo.setDate(today.getDate() - 1);
+  console.log(oneDayAgo);
+
   try {
-    let childOrders = await OrderChild.find({});
-    let adultOrders = await OrderAdult.find({});
+    let childOrders = await OrderChild.find({
+      createdAt: { $lt: oneDayAgo },
+    });
+    let adultOrders = await OrderAdult.find({
+      createdAt: { $lt: oneDayAgo },
+    });
     res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
   } catch (error) {
     throw new BadRequestError("Ошибка 500!");
