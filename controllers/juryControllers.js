@@ -57,6 +57,7 @@ const getOrders = async (req, res) => {
       createdAt: { $lt: oneDayAgo },
       status: "ok",
     });
+
     res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
   } catch (error) {
     throw new BadRequestError("Ошибка 500!");

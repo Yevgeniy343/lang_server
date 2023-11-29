@@ -122,6 +122,9 @@ const OrderAdultSchema = new mongoose.Schema(
     jury: {
       type: Array,
     },
+    tarif: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

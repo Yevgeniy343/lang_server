@@ -6,6 +6,11 @@ const MIME_TYPE_MAP = {
   "image/jpeg": "jpeg",
   "image/jpg": "jpg",
   "application/pdf": "pdf",
+  "application/msword": "doc",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    "docx",
+  "application/vnd.openxmlformats-officedocument.presentationml.presentation":
+    "pptx",
 };
 
 const fileUpload = multer({
