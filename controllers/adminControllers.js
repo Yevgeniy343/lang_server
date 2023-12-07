@@ -13,6 +13,7 @@ import {
   UnAuthenticatedError,
 } from "../errors/index-errors.js";
 import nodemailer from "nodemailer";
+import OrderChild from "../models/OrderChild.js";
 
 const login = async (req, res) => {
   const { login, password } = req.body;
@@ -551,6 +552,27 @@ const getReasons = async (req, res) => {
   }
 };
 
+const deleteOrder = async (req, res) => {
+  console.log(req.params);
+  const orderId = req.params.id;
+  try {
+    let order;
+    order = await OrdersChild.findById(orderId);
+    if (!order) {
+      order = await OrderAdult.findById(orderId);
+    }
+    // } else {
+    //   throw new BadRequestError("Заявка не найдена, повторите позднее !");
+    // }
+    await order.delete();
+    let ordersAdult = await OrderAdult.find({});
+    let ordersChild = await OrdersChild.find({});
+    res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
+  } catch (error) {
+    throw new BadRequestError("Error 500 !");
+  }
+};
+
 export {
   login,
   createEvent,
@@ -567,4 +589,5 @@ export {
   updateAdultOrder,
   updateStatusOrder,
   getReasons,
+  deleteOrder,
 };

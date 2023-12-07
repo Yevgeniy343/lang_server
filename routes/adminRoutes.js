@@ -16,6 +16,7 @@ import {
   updateAdultOrder,
   updateStatusOrder,
   getReasons,
+  deleteOrder,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -49,5 +50,7 @@ router.route("/editAdultOrder").patch(updateAdultOrder);
 router.route("/editStatusOrder").patch(updateStatusOrder);
 
 router.route("/getReasons").get(getReasons);
+
+router.route("/delete_order/:id").delete(deleteOrder);
 
 export default router;
