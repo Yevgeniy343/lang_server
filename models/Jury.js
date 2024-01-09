@@ -43,7 +43,19 @@ const JurySchema = new mongoose.Schema(
     phone: {
       type: String,
     },
-    subj: {
+    punct: {
+      type: String,
+    },
+    kval: {
+      type: String,
+    },
+    prof: {
+      type: String,
+    },
+    region: {
+      type: String,
+    },
+    place: {
       type: String,
     },
     stars: {

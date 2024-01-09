@@ -2,6 +2,7 @@ import Jury from "../models/Jury.js";
 import OrderChild from "../models/OrderChild.js";
 import OrderAdult from "../models/OrderAdult.js";
 import Event from "../models/Event.js";
+import Nomination from "../models/Nomination.js";
 import { StatusCodes } from "http-status-codes";
 import {
   BadRequestError,
@@ -57,25 +58,45 @@ const getOrders = async (req, res) => {
       // createdAt: { $lt: oneDayAgo },
       status: "ok",
     });
-
-    res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
+    let noms = await Nomination.find({});
+    console.log(noms);
+    res.status(StatusCodes.CREATED).json({ childOrders, adultOrders, noms });
   } catch (error) {
     throw new BadRequestError("Ошибка 500!");
   }
 };
 
 const editProfile = async (req, res) => {
-  const { name, email, lang, phone, nomins, id } = req.body;
+  console.log(req.body);
+  const {
+    name,
+    email,
+    lang,
+    phone,
+    nomins,
+    id,
+    oy,
+    punct,
+    kval,
+    place,
+    region,
+    job_title,
+  } = req.body;
   let jury = await Jury.findById(id);
   jury.name = name;
   jury.email = email;
   jury.phone = phone;
   jury.nomins = nomins;
+  jury.oy = oy;
+  jury.punct = punct;
+  jury.kval = kval;
+  jury.place = place;
+  jury.region = region;
+  jury.job_title = job_title;
   if (lang) {
     jury.lang = lang;
   }
   await jury.save();
-  console.log(jury);
   res.status(StatusCodes.CREATED).json(jury);
 };
 
