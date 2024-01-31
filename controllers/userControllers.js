@@ -184,7 +184,7 @@ const createChildOrder = async (req, res) => {
       }
     });
   } catch (error) {
-    throw new BadRequestError("Error 500!");
+    throw new BadRequestError("Ошибка 500!");
   }
   let childOrders = await OrderChild.find({ userId: userId });
   res.status(StatusCodes.CREATED).json(childOrders);
@@ -339,7 +339,7 @@ const getAllOrders = async (req, res) => {
     console.log(adultOrders);
     res.status(StatusCodes.CREATED).json({ childOrders, adultOrders });
   } catch (error) {
-    throw new BadRequestError("Internal server Error!");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -375,7 +375,7 @@ const updateChildrenOrder = async (req, res) => {
     let order = await OrderChild.findById(orderId);
 
     if (!order) {
-      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+      return res.status(StatusCodes.NOT_FOUND).json("Ордер не найден");
     }
     (order.name = name),
       (order.tarif = tarif),
@@ -402,7 +402,7 @@ const updateChildrenOrder = async (req, res) => {
     let childOrders = await OrderChild.find({ userId: userId });
     res.status(StatusCodes.OK).json(childOrders);
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -450,7 +450,7 @@ const updateAdultOrder = async (req, res) => {
   try {
     let order = await OrderAdult.findById(orderId);
     if (!order) {
-      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+      return res.status(StatusCodes.NOT_FOUND).json("Ордер не найден");
     }
     // order.eventId = eventId;
     // order.status = status;
@@ -493,7 +493,7 @@ const updateAdultOrder = async (req, res) => {
 
     res.status(StatusCodes.OK).json(adultOrders);
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -502,7 +502,7 @@ const getCondition = async (req, res) => {
     let condition = await Condition.find({});
     res.status(StatusCodes.OK).json(condition);
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 

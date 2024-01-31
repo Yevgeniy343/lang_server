@@ -4,7 +4,7 @@ const NominationSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please provide email"],
+      required: [true, "Укажите почту"],
       unique: true,
     },
     link: {

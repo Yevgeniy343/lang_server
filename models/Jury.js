@@ -9,17 +9,17 @@ const JurySchema = new mongoose.Schema(
 
     email: {
       type: String,
-      required: [true, "Please provide email"],
+      required: [true, "укажите почту"],
       validate: {
         validator: validator.isEmail,
-        message: "Please provide a valid email",
+        message: "Укажите корректную почту",
       },
       unique: true,
       trim: true,
     },
     password: {
       type: String,
-      required: [true, "Please provide password"],
+      required: [true, "Укажите пароль"],
       trim: true,
     },
     sp: {

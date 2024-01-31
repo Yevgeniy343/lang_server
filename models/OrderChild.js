@@ -4,11 +4,11 @@ const OrderChildSchema = new mongoose.Schema(
   {
     eventId: {
       type: String,
-      required: [true, "Please provide eventId"],
+      required: [true, "Нет идентификатора события"],
     },
     userId: {
       type: String,
-      required: [true, "Please provide userId"],
+      required: [true, "Пользователь не определен"],
     },
     name: {
       type: String,

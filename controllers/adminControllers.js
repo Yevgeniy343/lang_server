@@ -247,7 +247,7 @@ const deleteEvent = async (req, res) => {
   let delete_file2;
   try {
     event = await Event.findById(req.params.id);
-    throw new BadRequestError("Error 500!");
+    throw new BadRequestError("Ошибка 500!");
   } catch (error) {}
   delete_file1 = event.pdf;
   delete_file2 = event.image;
@@ -371,7 +371,7 @@ const updateChildrenOrder = async (req, res) => {
     // order.eventId= eventId,
 
     if (!order) {
-      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+      return res.status(StatusCodes.NOT_FOUND).json("Ордер не найден");
     }
     (order.name = name),
       (order.tarif = tarif),
@@ -397,7 +397,7 @@ const updateChildrenOrder = async (req, res) => {
     let ordersChild = await OrdersChild.find({});
     res.status(StatusCodes.OK).json({ order, ordersChild });
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -445,7 +445,7 @@ const updateAdultOrder = async (req, res) => {
   try {
     let order = await OrderAdult.findById(orderId);
     if (!order) {
-      return res.status(StatusCodes.NOT_FOUND).json("Order not found");
+      return res.status(StatusCodes.NOT_FOUND).json("Ордер не найден");
     }
     // order.eventId = eventId;
     order.status = status;
@@ -486,7 +486,7 @@ const updateAdultOrder = async (req, res) => {
     let ordersAdult = await OrderAdult.find({});
     res.status(StatusCodes.OK).json({ order, ordersAdult });
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -505,7 +505,7 @@ const updateStatusOrder = async (req, res) => {
     let ordersChild = await OrdersChild.find({});
     res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
   } catch (error) {
-    throw new BadRequestError("Internal server error");
+    throw new BadRequestError("Ошибка 500!");
   }
 
   if (req.body.status === "declined") {
@@ -538,7 +538,7 @@ const updateStatusOrder = async (req, res) => {
         }
       });
     } catch (error) {
-      throw new BadRequestError("Error 500 !");
+      throw new BadRequestError("Ошибка 500!");
     }
   }
 };
@@ -548,7 +548,7 @@ const getReasons = async (req, res) => {
     let reasons = await Reason.find({});
     res.status(StatusCodes.OK).json(reasons);
   } catch (error) {
-    throw new BadRequestError("Error 500 !");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 
@@ -569,7 +569,7 @@ const deleteOrder = async (req, res) => {
     let ordersChild = await OrdersChild.find({});
     res.status(StatusCodes.OK).json({ ordersChild, ordersAdult });
   } catch (error) {
-    throw new BadRequestError("Error 500 !");
+    throw new BadRequestError("Ошибка 500!");
   }
 };
 

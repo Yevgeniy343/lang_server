@@ -125,7 +125,7 @@ const remind = async (req, res) => {
       }
     });
   } catch (error) {
-    throw new BadRequestError("Error 500 !");
+    throw new BadRequestError("Ошибка 500!");
   }
 
   jury.password = new_pass;

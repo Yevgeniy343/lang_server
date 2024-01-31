@@ -4,13 +4,13 @@ const AdminSchema = new mongoose.Schema(
   {
     login: {
       type: String,
-      required: [true, "Please provide email"],
+      required: [true, "Укажите почту"],
       unique: true,
       trim: true,
     },
     password: {
       type: String,
-      required: [true, "Please provide password"],
+      required: [true, "Укажите пароль"],
       trim: true,
     },
   },

@@ -4,17 +4,17 @@ const EventSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: [true, "Please provide name"],
+      required: [true, "Укажите имя"],
       // unique: true,
       trim: true,
     },
     date1: {
       type: String,
-      required: [true, "Please provide date1"],
+      required: [true, "Укажите дату"],
     },
     date2: {
       type: String,
-      required: [true, "Please provide date2"],
+      required: [true, "Укажите дату"],
     },
     pdf: {
       type: String,
@@ -33,35 +33,35 @@ const EventSchema = new mongoose.Schema(
     },
     tarif_1: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     tarif_2: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     tarif_3: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     tarif_1a: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     tarif_2a: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     tarif_3a: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     supervisor: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     diplom: {
       type: Number,
-      required: [true, "Please provide price"],
+      required: [true, "Укажите тарифы"],
     },
     index: {
       type: Number,

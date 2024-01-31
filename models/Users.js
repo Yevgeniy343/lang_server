@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 
 const UserSchema = new mongoose.Schema(
   {
-    name: { type: String, required: [true, "Please provide name"], trim: true },
+    name: { type: String, required: [true, "Укажите имя"], trim: true },
     second_name: { type: String, trim: true },
     phone: {
       type: String,
@@ -27,17 +27,17 @@ const UserSchema = new mongoose.Schema(
 
     email: {
       type: String,
-      required: [true, "Please provide email"],
+      required: [true, "Укажите почту"],
       validate: {
         validator: validator.isEmail,
-        message: "Please provide a valid email",
+        message: "Укажите корректную почту",
       },
       unique: true,
       trim: true,
     },
     password: {
       type: String,
-      required: [true, "Please provide password"],
+      required: [true, "Укажите пероль"],
       trim: true,
     },
     referal: {
