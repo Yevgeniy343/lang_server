@@ -81,6 +81,7 @@ const editProfile = async (req, res) => {
     place,
     region,
     job_title,
+    prof,
   } = req.body;
   let jury = await Jury.findById(id);
   jury.name = name;
@@ -91,6 +92,7 @@ const editProfile = async (req, res) => {
   jury.punct = punct;
   jury.kval = kval;
   jury.place = place;
+  jury.prof = prof;
   jury.region = region;
   jury.job_title = job_title;
   if (lang) {

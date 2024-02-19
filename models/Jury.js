@@ -58,6 +58,12 @@ const JurySchema = new mongoose.Schema(
     place: {
       type: String,
     },
+    job_title: {
+      type: String,
+    },
+    prof: {
+      type: String,
+    },
     stars: {
       type: Number,
       default: 0,
