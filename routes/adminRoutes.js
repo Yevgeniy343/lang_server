@@ -17,6 +17,7 @@ import {
   updateStatusOrder,
   getReasons,
   deleteOrder,
+  createDiplom,
 } from "../controllers/adminControllers.js";
 import fileUpload from "../middleware/file-upload.js";
 
@@ -52,5 +53,7 @@ router.route("/editStatusOrder").patch(updateStatusOrder);
 router.route("/getReasons").get(getReasons);
 
 router.route("/delete_order/:id").delete(deleteOrder);
+
+router.route("/upload_diplom").patch(fileUpload.single("file"), createDiplom);
 
 export default router;
