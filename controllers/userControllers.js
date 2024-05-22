@@ -13,6 +13,7 @@ import {
 } from "../errors/index-errors.js";
 import nodemailer from "nodemailer";
 import { generate } from "random-words";
+import Diplom from "../models/Diplom.js";
 
 const editUser = async (req, res) => {
   const { name, email, phone, second_name, date, city, job, job_title, id } =
@@ -506,6 +507,17 @@ const getCondition = async (req, res) => {
   }
 };
 
+const getDiploms = async (req, res) => {
+  console.log("params", req.param);
+  try {
+    const diploms = await Diplom.find({ userId: req.params.userId });
+    console.log("diploms", diploms);
+    res.status(StatusCodes.OK).json(diploms);
+  } catch (error) {
+    throw new BadRequestError("Ошибка 500!");
+  }
+};
+
 export {
   editUser,
   getEvent,
@@ -516,4 +528,5 @@ export {
   updateChildrenOrder,
   updateAdultOrder,
   getCondition,
+  getDiploms,
 };
