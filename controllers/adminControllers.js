@@ -14,6 +14,7 @@ import {
 } from "../errors/index-errors.js";
 import nodemailer from "nodemailer";
 import OrderChild from "../models/OrderChild.js";
+import Diplom from "../models/Diplom.js";
 
 const login = async (req, res) => {
   const { login, password } = req.body;
@@ -576,6 +577,16 @@ const deleteOrder = async (req, res) => {
 const createDiplom = async (req, res) => {
   console.log(req.file);
   console.log(req.body);
+  const { userId, eventId, eventName, date1, date2 } = req.body;
+  const diplom = await Diplom.create({
+    userId,
+    eventId,
+    eventName,
+    date1,
+    date2,
+    file: req.file.path,
+  });
+  res.status(StatusCodes.OK).json({ msg: "Диплом загружен" });
 };
 
 export {
